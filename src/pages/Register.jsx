@@ -1,4 +1,4 @@
-function Register() {
+function DashboardRegister() {
   return (
     <>
       <h1>Tela de Cadastro</h1>
@@ -6,4 +6,4 @@ function Register() {
   );
 }
 
-export default Register;
+export default DashboardRegister;

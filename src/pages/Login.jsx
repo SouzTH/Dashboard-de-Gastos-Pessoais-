@@ -1,4 +1,4 @@
-function Login() {
+function DashboardLogin() {
   return (
     <>
       <h1>Tela de Login</h1>
@@ -6,4 +6,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default DashboardLogin;
