@@ -1,13 +1,11 @@
 //import { useState } from "react";
-import Helou from "./components/Helou.jsx";
 
-function PaginaInicial() {
+function App() {
   return (
     <>
-      <h1>pagina helo word</h1>
-      <Helou />
+      <h1>Pagina inicial</h1>
     </>
   );
 }
 
-export default PaginaInicial;
+export default App;
