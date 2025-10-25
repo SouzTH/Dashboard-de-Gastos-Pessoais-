@@ -7,6 +7,7 @@ import Register from "./pages/Register.jsx";
 import Login from "./pages/Login.jsx";
 import DashboardLayout from "./layouts/DashboardLayout.jsx";
 import DashboardHome from "./pages/DashboardHome.jsx";
+import DashboardTeam from "./pages/DashboardTeam.jsx";
 import DashboardSettings from "./pages/DashboardSettings.jsx";
 import DashboardTransaction from "./pages/DashboardTransaction.jsx";
 
@@ -20,6 +21,7 @@ createRoot(document.getElementById("root")).render(
 
         <Route path="/dashboard" element={<DashboardLayout />}>
           <Route index element={<DashboardHome />} />
+          <Route path="team" element={<DashboardTeam />} />
           <Route path="settings" element={<DashboardSettings />} />
           <Route path="transaction" element={<DashboardTransaction />} />
         </Route>
