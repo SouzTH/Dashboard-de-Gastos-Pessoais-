@@ -1,6 +1,6 @@
 import RegisterForm from '../components/registerForm'
 
-function DashboardRegister() {
+function Register() {
 
   return (
     <>
@@ -14,4 +14,4 @@ function DashboardRegister() {
   );
 }
 
-export default DashboardRegister;
+export default Register;
