@@ -21,7 +21,8 @@ function RegisterForm(){
         }else
         if(password === password2){
             alert("Senhas Iguais")
-        }
+        } else
+        alert("Senhas diferentes")
     }
 
     return (
