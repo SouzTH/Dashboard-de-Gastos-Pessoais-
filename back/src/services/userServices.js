@@ -15,6 +15,56 @@ async function readUser(id) {
   return usuario;
 }
 
+async function createUser(name, email, senha, imagePath) {
+  const salt = bcrypt.genSaltSync();
+  const hash = bcrypt.hashSync(senha, salt);
+
+  //
+  const usuario = {
+    nome: name,
+    email: email,
+    senha: hash,
+    foto: imagePath,
+  };
+
+  await database("usuario").insert(usuario);
+
+  return "Usuario criado com sucesso!";
+}
+
+async function updateUser(id, name, email, senha, imagePath) {
+  const busca = await database("usuario").select("*").where({ id: id }).first();
+
+  if (!busca) {
+    throw new Error("Usuario nao encontrado");
+  }
+
+  if (name === "" || email === "" || senha === "") {
+    throw new Error("Todos os campos devem ser preenchidos");
+  }
+
+  let hash;
+
+  if (senha) {
+    const salt = bcrypt.genSaltSync();
+    hash = bcrypt.hashSync(senha, salt);
+  }
+
+  const novo_usuario = {
+    nome: name,
+    email: email,
+    senha: hash,
+  };
+
+  if (imagePath) {
+    novo_usuario.foto = imagePath;
+  }
+
+  await database("usuario").update(novo_usuario).where({ id: id });
+
+  return "usuario atualizado";
+}
+
 async function login(email, senha) {
   const usuario = await database("usuario")
     .select("*")
@@ -36,7 +86,20 @@ async function login(email, senha) {
 
   const token = jwt.sign(payload, process.env.JWT_KEY, { expiresIn: "24h" });
 
-  return token; //verificar depois na .env
+  return token;
+}
+
+async function deleteUser(id) {
+  const user = await database("usuario").select("*").where({ id: id }).first();
+  console.log(id);
+
+  if (!user) {
+    throw new Error("Usuario nao encontrado");
+  }
+
+  await database("usuario").delete().where({ id: id });
+
+  return "usuario foi deletado com sucesso!";
 }
 
 module.exports = {
