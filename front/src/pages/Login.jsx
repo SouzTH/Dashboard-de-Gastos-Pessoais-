@@ -1,46 +1,66 @@
-// CODIGO QUE ESTAVA NO ARQUIVO ANTES DAS MINHAS ALTERAÇÕES
+import { useState, useEffect, useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { AuthContext } from "../context/AuthContext";
+import InputField from "../components/inputField";
+import Button from "../components/button";
+import Checkbox from "../components/checkBox";
+import "../style/login.css";
 
-// function DashboardLogin() {
-//   return (
-//     <>
-//       <h1>Tela de Login</h1>
-//     </>
-//   );
-// }
-// export default DashboardLogin;
+export default function Login() {
+  const [email, setEmail] = useState("");
+  const [senha, setSenha] = useState("");
+  const [lembrar, setLembrar] = useState(false);
+  const { login } = useContext(AuthContext);
+  const navigate = useNavigate();
 
+  useEffect(() => {
+    const savedEmail = localStorage.getItem("email");
+    if (savedEmail) setEmail(savedEmail);
+  }, []);
 
+  const handleLogin = async (e) => {
+    e.preventDefault();
 
-import InputField from '../components/inputField';
-import Button from '../components/button';
-import Checkbox from '../components/checkBox';
-import '../style/login.css'; // importa o css local da tela, o ".." faz com que pule as pastas anteriores e abra só as escritar aí se n me engano
+    if (!email || !senha) {
+      alert("Preencha todos os campos!");
+      return;
+    }
 
+    try {
+      const response = await axios.post("http://localhost:8000/login", {
+        email,
+        senha,
+      });
 
+      const { token, user } = response.data;
+      login(user, token);
 
-export default function Login({
-  onEmailChange = () => {  },
-  onPasswordChange = () => {  },
-  onRememberChange = () => {  },
-  onSubmit = () => {  },
-  rememberChecked = false,
-}) {
+      if (lembrar) localStorage.setItem("email", email);
+      else localStorage.removeItem("email");
+
+      navigate("/dashboard");
+    } catch (err) {
+      alert("Email ou senha incorretos!");
+    }
+  };
+
   return (
     <div className="login-page">
       <div className="login-card" role="main" aria-labelledby="login-title">
-        <h1 id="login-title" className="login-title">Acesse sua conta</h1>
+        <h1 id="login-title" className="login-title">
+          Acesse sua conta
+        </h1>
 
-        <form
-          className="login-form"
-          onSubmit={(e) => { e.preventDefault(); onSubmit(); }}
-        >
+        <form className="login-form" onSubmit={handleLogin}>
           <InputField
             id="email"
             label="Email"
             type="email"
             name="email"
             placeholder="seu@email.com"
-            onChange={onEmailChange}
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             required
             className="login-input"
           />
@@ -51,7 +71,8 @@ export default function Login({
             type="password"
             name="password"
             placeholder="Sua senha"
-            onChange={onPasswordChange}
+            value={senha}
+            onChange={(e) => setSenha(e.target.value)}
             required
             className="login-input"
           />
@@ -59,19 +80,25 @@ export default function Login({
           <div className="login-row">
             <Checkbox
               id="remember"
-              checked={rememberChecked}
-              onChange={onRememberChange}
-              label="Lembre de mim"
-              className="login-checkbox" 
+              checked={lembrar}
+              onChange={() => setLembrar(!lembrar)}
+              label="Lembre-se de mim"
+              className="login-checkbox"
             />
-            <a href="/forgot" className="link-small">Esqueceu sua senha?</a>
+            <a href="/forgot" className="link-small">
+              Esqueceu sua senha?
+            </a>
           </div>
 
-          <Button type="submit" className="login-button">Entrar</Button>
+          <Button type="submit" className="login-button">
+            Entrar
+          </Button>
 
           <div className="signup-row">
             <span>Não tem conta?</span>
-            <a href="/register" className="link-signup"> Cadastre-se</a>
+            <a href="/register" className="link-signup">
+              Cadastre-se
+            </a>
           </div>
         </form>
       </div>
