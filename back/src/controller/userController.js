@@ -9,7 +9,7 @@ async function readUser(req, res) {
 
     res.json({ users: usuarios }).status(200);
   } catch (e) {
-    res.json({ erro: e.message });
+    res.json({ erro: e.message }).status(500);
   }
 }
 
@@ -38,7 +38,7 @@ async function createUser(req, res) {
 
     res.json({ message: userCreate }).status(200);
   } catch (e) {
-    res.json({ erro: e.message });
+    res.json({ erro: e.message }).status(500);;
   }
 }
 
@@ -79,7 +79,7 @@ async function login(req, res) {
     const token = await userService.login(email, senha);
     res.json({ token: token }).status(200);
   } catch (e) {
-    res.json({ erro: e.message });
+    res.json({ erro: e.message }).status(500);
   }
 }
 
@@ -89,7 +89,7 @@ async function deleteUser(req, res) {
     const message = await userService.deleteUser(id);
     res.json({ message: message }).status(200);
   } catch (e) {
-    res.json({ erro: e.message });
+    res.json({ erro: e.message }).status(500);
   }
 }
 
