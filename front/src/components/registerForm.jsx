@@ -7,22 +7,26 @@ function RegisterForm(){
     const [password, setPassword] = useState("");
     const [password2, setPassword2] = useState("");
     
-    function validaEmail(email){
+    function validaEmail(){
         const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         return regex.test(email);
+    }
+    function validaSenha(){
+        return password === password2
     }
 
     function checkRegister(){
         if (nome.trim() == "" || email.trim() == "" || password.trim() == "" || password2.trim() == ""){
-            alert("Campo vazio!");
-        }else
-        if(!validaEmail(email)){
-            alert("Email invalido!");
-        }else
-        if(password === password2){
-            alert("Senhas Iguais")
-        } else
-        alert("Senhas diferentes")
+            alert("Há campos vazios!");
+            return false;
+        }else if(!validaEmail()){
+            alert("O Email inserido é invalido!");
+            return false;
+        }else if(!validaSenha()){
+            alert("As senhas são diferentes!")
+            return false;
+        } 
+        alert("Você foi cadastrado!")
     }
 
     return (
