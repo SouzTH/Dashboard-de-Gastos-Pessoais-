@@ -1,4 +1,4 @@
-const knex = require("knex")()
+const knex = require("../database/exports.js")
 
 async function getAllTransactions(id){
     const transactions = await knex("transacao")
@@ -14,6 +14,7 @@ async function getAllTransactions(id){
 
 
 async function createTransaction(transactionData) { 
+    
 /*
 é passado um json no formato:
 {
@@ -53,7 +54,7 @@ async function createTransaction(transactionData) {
 
     await knex("transacao").insert(transactionData)
 
-    return newTransaction
+    return transactionData
 }
 
 

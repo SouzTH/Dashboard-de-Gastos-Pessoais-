@@ -1,4 +1,4 @@
-const transactionService = require("../services/transactionServices.js");
+const transactionService = require("../services/transactionService.js");
 
 async function getAllTransactions(req, res) {
   try {
@@ -23,7 +23,7 @@ async function createTransaction(req, res) {
   }
 }
 
-modules.exports = {
+module.exports = {
   getAllTransactions,
   createTransaction,
 }
