@@ -1,13 +1,13 @@
 const router = require("express").Router();
 
-const categoryController = require("../controller/categoryController");
+const transactionController = require("../controller/transactionController");
 
 const auth = require("../middleware/auth");
 
-router.get("/read/category/:id", auth, categoryController.readCategory);
+router.get("/read/transaction/:id",  transactionController.getAllTransactions);
 // nao esqueça de colocar bearer <valor do token> nas requisições de rota que pedem auth
-router.post("/create/category", categoryController.createCategory);
-router.patch("/update/category/:id", auth, categoryController.updateCategory);
-router.delete("/delete/category/:id", auth, categoryController.deleteCategory);
+router.post("/create/transaction", transactionController.createtransaction);
+router.patch("/update/transaction/:id", auth, transactionController.updatetransaction);
+router.delete("/delete/transaction/:id", auth, transactionController.deletetransaction);
 
 module.exports = router;
