@@ -1,4 +1,4 @@
-requestAnimationFrame("dotenv").config();
+require("dotenv").config();
 const jwt = require("jsonwebtoken");
 
 async function autenticar(req, res, next) {
