@@ -57,8 +57,20 @@ async function createTransaction(transactionData) {
     return transactionData
 }
 
+async function deleteTransaction(transactionIdData) {
+    const linhasDeletadas = await knex("transacao").delete().where({ 
+        id: transactionIdData.id,
+        id_do_usuario: transactionIdData.idUser
+    });
+    
+    if (linhasDeletadas === 0) {
+        throw new Error("Não foi possível deletar a transação");
+    }
+    return "Transação foi deletada com sucesso.";
+}
 
 module.exports = {
     getAllTransactions,
     createTransaction,
+    deleteTransaction,
 }
