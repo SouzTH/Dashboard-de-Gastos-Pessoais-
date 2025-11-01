@@ -13,7 +13,7 @@ function DashboardLayout() {
               src={imgExemplo}
             />
             <NavLink
-              to=""
+              to="settings"
               className="rounded-3xl bg-gray-500 border-gray-500 p-2 text-center"
             >
               Minha Conta
@@ -38,12 +38,7 @@ function DashboardLayout() {
             >
               Transação
             </NavLink>
-            <NavLink
-              to="settings"
-              className="rounded-3xl bg-gray-500 border-gray-500 p-2 text-center"
-            >
-              Configurações
-            </NavLink>
+            
           </div>
         </div>
         <Outlet />
