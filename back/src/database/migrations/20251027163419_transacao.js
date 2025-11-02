@@ -23,6 +23,7 @@ exports.up = function (knex) {
       .unsigned()
       .references("id")
       .inTable("usuario")
+      .notNullable()
       .onDelete("CASCADE");
   });
 };
