@@ -6,6 +6,7 @@ import InputField from "../components/inputField";
 import Button from "../components/button";
 import Checkbox from "../components/checkBox";
 import "../style/login.css";
+import { NavLink } from "react-router-dom";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -96,9 +97,9 @@ export default function Login() {
 
           <div className="signup-row">
             <span>Não tem conta?</span>
-            <a href="/register" className="link-signup">
+            <NavLink to="/register" className="text-violet-600">
               Cadastre-se
-            </a>
+            </NavLink>
           </div>
         </form>
       </div>

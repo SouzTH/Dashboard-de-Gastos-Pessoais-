@@ -10,7 +10,7 @@ import DashboardTransaction from "../pages/DashboardTransaction";
 export default function AppRoutes() {
   return (
     <Routes>
-      <Route path="/" element={<Login />} />
+      <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route path="/dashboard" element={<DashboardLayout />}>
         <Route index element={<DashboardHome />} />
