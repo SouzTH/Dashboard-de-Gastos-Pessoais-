@@ -4,7 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "latest": "npx knex migrate:latest",
+    "rollback": "npx knex migrate:rollback",
+    "start": "nodemon ./src/database/server.js"
   },
   "author": "",
   "license": "ISC",
@@ -12,6 +15,10 @@
     "bcrypt": "^6.0.0",
     "express": "^5.1.0",
     "express-fileupload": "^1.5.2",
-    "jsonwebtoken": "^9.0.2"
+    "jsonwebtoken": "^9.0.2",
+    "dotenv": "^17.2.3",
+    "knex": "^3.1.0",
+    "mysql": "^2.18.1",
+    "nodemon": "^3.1.10"
   }
 }
