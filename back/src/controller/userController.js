@@ -7,9 +7,9 @@ async function readUser(req, res) {
     const id = req.params.id;
     const usuarios = await userService.readUser(id);
 
-    res.json({ users: usuarios }).status(200);
+    res.status(200).json({ users: usuarios });
   } catch (e) {
-    res.json({ erro: e.message }).status(500);
+    res.status(500).json({ erro: e.message });
   }
 }
 
@@ -36,9 +36,9 @@ async function createUser(req, res) {
       imagePath
     );
 
-    res.json({ message: userCreate }).status(200);
+    res.status(200).json({ message: userCreate });
   } catch (e) {
-    res.json({ erro: e.message }).status(500);;
+    res.status(500).json({ erro: e.message });
   }
 }
 
@@ -67,9 +67,9 @@ async function updateUser(req, res) {
       imagePath
     );
 
-    res.json({ message: message }).status(200);
+    res.status(200).json({ message: message });
   } catch (e) {
-    res.json({ erro: e.message }).status(500);
+    res.status(500).json({ erro: e.message });
   }
 }
 
@@ -77,9 +77,9 @@ async function login(req, res) {
   try {
     const { email, senha } = req.body;
     const token = await userService.login(email, senha);
-    res.json({ token: token }).status(200);
+    res.status(200).json({ token: token });
   } catch (e) {
-    res.json({ erro: e.message }).status(500);
+    res.status(500).json({ erro: e.message });
   }
 }
 
@@ -87,9 +87,9 @@ async function deleteUser(req, res) {
   try {
     const id = req.params.id;
     const message = await userService.deleteUser(id);
-    res.json({ message: message }).status(200);
+    res.status(200).json({ message: message });
   } catch (e) {
-    res.json({ erro: e.message }).status(500);
+    res.status(500).json({ erro: e.message });
   }
 }
 

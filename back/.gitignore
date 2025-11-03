@@ -13,7 +13,8 @@ node_modules
 dist
 dist-ssr
 *.local
-
+uploads/**
+!uploads/.gitkeep
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
