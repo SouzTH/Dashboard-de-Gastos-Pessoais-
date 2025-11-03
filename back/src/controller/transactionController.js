@@ -7,11 +7,11 @@ async function getAllTransactions(req, res) {
     
     if(Number(id) === Number(idAuth)){
       const transactions = await transactionService.getAllTransactions(id);
-      res.json({ message: transactions }).status(200);
+      res.status(200).json({ message: transactions });
     }    
     res.json({message: "O ID inserido não corresponde ao usuário logado."}).status(403);
   } catch (err) {
-    res.json({ message: err.message }).status(500);
+    res.status(500).json({ message: err.message });
   }
 }
 
@@ -20,9 +20,9 @@ async function createTransaction(req, res) {
     const transactionData = req.body
     const newTransaction = await transactionService.createTransaction(transactionData);
 
-    res.json({message: newTransaction}).status(200);
+    res.status(200).json({message: newTransaction});
   }catch (err){
-    res.json({ message: err.message }).status(500);
+    res.status(500).json({ message: err.message });
   }
 }
 
@@ -34,7 +34,7 @@ async function deleteTransaction(req, res) {
     }
     await transactionService.deleteTransaction(transactionAndUserId)
   } catch(err){
-    res.json({message: err.message}).satus(500);
+    res.satus(500).json({message: err.message});
   }
 }
 
