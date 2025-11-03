@@ -1,4 +1,4 @@
-const knex = require("../database/exports.js")
+const knex = require("../database/export")
 
 async function getAllTransactions(id){
     const transactions = await knex("transacao")
