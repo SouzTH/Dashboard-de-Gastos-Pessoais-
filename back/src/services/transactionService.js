@@ -1,4 +1,4 @@
-const { updateTransaction } = require("../controller/transactionController");
+
 const knex = require("../database/export")
 
 async function getAllTransactions(id){
@@ -79,7 +79,7 @@ async function updateTransaction(id, updatedData) {
     if (!busca) {
       throw new Error("Transação não encontrada.");
     }
-    
+
     const {
       valor,
       tipo_de_transacao,
