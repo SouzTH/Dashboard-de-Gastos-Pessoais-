@@ -48,11 +48,12 @@ export default function Login() {
 
   return (
     <div className="login-page">
-      <div className="login-card" role="main" aria-labelledby="login-title">
-        <h1 id="login-title" className="login-title">
-          Acesse sua conta
+
+      <h1 id="login-title" className="login-title">
+          <strong>Acesse Sua Conta</strong>
         </h1>
 
+          <div className="login-card" role="main" aria-labelledby="login-title">
         <form className="login-form" onSubmit={handleLogin}>
           <InputField
             id="email"
@@ -96,8 +97,8 @@ export default function Login() {
           </Button>
 
           <div className="signup-row">
-            <span>Não tem conta?</span>
-            <NavLink to="/register" className="text-violet-600">
+            <span> Não tem conta? </span>
+            <NavLink to="/register" className="link-signup">
               Cadastre-se
             </NavLink>
           </div>
