@@ -1,130 +1,123 @@
+const knex = require("../database/export");
 
-const knex = require("../database/export")
+async function getAllTransactions(id) {
+  const transactions = await knex("transacao")
+    .select("*")
+    .where({ id_do_usuario: id });
 
-async function getAllTransactions(id){
-    const transactions = await knex("transacao")
-    .select('*')
-    .where({id_do_usuario: id});
+  if (transactions.length === 0) {
+    throw new Error("Nenhuma transação encontrada para este usuário.");
+  }
 
-    if(transactions.length == 0){
-        throw new Error("Impossível selecionar transação.")
-    }
-
-    return transactions
+  return transactions;
 }
 
+async function createTransaction(transactionData) {
+  const {
+    valor,
+    tipo_de_transacao,
+    data_transacao,
+    descricao,
+    categoria,
+    conta,
+    id_do_grupo,
+    id_do_usuario, 
+  } = transactionData || {};
 
-async function createTransaction(transactionData) { 
-    
-/*
-é passado um json no formato:
-{
-  "valor": 150.75,
-  "tipo_de_transacao": "despesa",
-  "data_transacao": "2025-10-25",
-  "descricao": "Compra de material de escritório",
-  "categoria": "Escritório",
-  "conta": "Cartão Corporativo",
-  "id_do_grupo": 12,
-  "id_do_usuario": 42
-}
-*/
-    const { 
-        valor, 
-        tipo_de_transacao, 
-        categoria, 
-        conta, 
-        id_do_usuario,
-    } = transactionData || {}; 
+  if (!tipo_de_transacao || !categoria || !conta) {
+    throw new Error("Campos obrigatórios: 'tipo', 'categoria' e 'conta'.");
+  }
 
-    if (!tipo_de_transacao || !categoria || !conta) {
-        throw new Error("Impossível criar a transação. Os campos 'tipo', 'categoria' e 'conta' são obrigatórios.");
-    }
+  if (typeof valor !== "number" || valor < 0) {
+    throw new Error("O campo 'valor' deve ser um número positivo.");
+  }
 
-    if (!Number.isInteger(id_do_usuario) 
-        || id_do_usuario <= 0) {
-        throw new Error("O campo 'id_do_usuario' é obrigatório, deve ser um número inteiro positivo.");
-    }
+  if (!Number.isInteger(id_do_usuario) || id_do_usuario <= 0) {
+    throw new Error("ID do usuário inválido.");
+  }
 
-    if (typeof valor !== 'number') {
-        throw new Error("Impossível criar a transação. O campo 'valor' é obrigatório e deve ser um número.");
-    }
-    if (valor < 0) {
-        throw new Error("Impossível criar a transação. O valor não pode ser negativo.");
-    }
+  const inserted = await knex("transacao").insert({
+    valor,
+    tipo_de_transacao,
+    data_transacao,
+    descricao,
+    categoria,
+    conta,
+    id_do_grupo,
+    id_do_usuario,
+  });
 
-    await knex("transacao").insert(transactionData)
+  if (!inserted) {
+    throw new Error("Falha ao criar transação.");
+  }
 
-    return transactionData
+  return transactionData;
 }
 
 async function deleteTransaction(transactionIdData) {
-    const linhasDeletadas = await knex("transacao").delete().where({ 
-        id: transactionIdData.id,
-        id_do_usuario: transactionIdData.idUser
+  const linhasDeletadas = await knex("transacao")
+    .delete()
+    .where({
+      id: transactionIdData.id,
+      id_do_usuario: transactionIdData.idUser,
     });
-    
-    if (linhasDeletadas === 0) {
-        throw new Error("Não foi possível deletar a transação");
-    }
-    return "Transação foi deletada com sucesso.";
+
+  if (linhasDeletadas === 0) {
+    throw new Error("Transação não encontrada ou não pertence ao usuário.");
+  }
+
+  return "Transação deletada com sucesso.";
 }
 
-async function updateTransaction(id, updatedData) {
-  try {
-    const busca = await knex("transacao")
-      .select("*")
-      .where({ id })
-      .first();
-    if (!busca) {
-      throw new Error("Transação não encontrada.");
-    }
+async function updateTransaction(id, updatedData, idAuth) {
+  
+  const busca = await knex("transacao").where({ id }).first();
 
-    const {
-      valor,
-      tipo_de_transacao,
-      data_transacao,
-      descricao,
-      categoria,
-      conta,
-      id_do_grupo,
-      id_do_usuario,
-    } = updatedData || {};
-
-    if (!valor || !tipo_de_transacao || !categoria || !conta) {
-      throw new Error("Todos os campos obrigatórios devem ser preenchidos.");
-    }
-    if (typeof valor !== "number" || valor < 0) {
-      throw new Error("O campo 'valor' deve ser um número positivo.");
-    }
-    if (!Number.isInteger(id_do_usuario) || id_do_usuario <= 0) {
-      throw new Error("O campo 'id_do_usuario' deve ser um número inteiro positivo.");
-    }
-
-    const newTransaction = {
-      valor,
-      tipo_de_transacao,
-      data_transacao,
-      descricao,
-      categoria,
-      conta,
-      id_do_grupo,
-      id_do_usuario,
-    };
-
-    await knex("transacao")
-      .update(newTransaction)
-      .where({ id });
-    
-    return newTransaction;
-  } catch (err) {
-    throw new Error("Não foi possível atualizar a transação: " + err.message);
+  if (!busca) {
+    throw new Error("Transação não encontrada.");
   }
+
+  
+  if (busca.id_do_usuario !== idAuth) {
+    throw new Error("Você não tem permissão para editar esta transação.");
+  }
+
+  const {
+    valor,
+    tipo_de_transacao,
+    data_transacao,
+    descricao,
+    categoria,
+    conta,
+    id_do_grupo,
+  } = updatedData || {};
+
+  if (!valor || !tipo_de_transacao || !categoria || !conta) {
+    throw new Error("Todos os campos obrigatórios devem ser preenchidos.");
+  }
+
+  if (typeof valor !== "number" || valor < 0) {
+    throw new Error("O campo 'valor' deve ser um número positivo.");
+  }
+
+  const newTransaction = {
+    valor,
+    tipo_de_transacao,
+    data_transacao,
+    descricao,
+    categoria,
+    conta,
+    id_do_grupo,
+  };
+
+  await knex("transacao").update(newTransaction).where({ id });
+
+  return newTransaction;
 }
 
 module.exports = {
-    getAllTransactions,
-    createTransaction,
-    deleteTransaction,
-    updateTransaction,
-}
+  getAllTransactions,
+  createTransaction,
+  deleteTransaction,
+  updateTransaction,
+};
