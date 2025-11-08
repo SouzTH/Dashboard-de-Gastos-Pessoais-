@@ -1,23 +1,41 @@
+//import React, { useState, useEffect } from "react";  //teste sem usuario
+
 import { useContext, useRef } from "react";
 import { UserContext } from "../context/UserContext";
 import { backendURL } from "../services/api";
+
+import UserProfileDisplay from "../components/UserProfileDisplay.jsx";
+import ProfileDataForm from "../components/ProfileDataForm.jsx";
+import DeleteAccountButton from "../components/DeleteAccountButton.jsx";
+
+import "../style/ConfiguracoesPerfil.css";
+
+// const beeUser = {  //teste sem usuario
+//      nome: "Bee Teste",
+//      email: "bee@teste.com",
+//  };
+
 export default function DashboardSettings() {
   const { user, handleUpdate, handleDelete } = useContext(UserContext);
 
   const imageURL = user && user.foto ? `${backendURL}${user.foto}` : null;
   const fileInputRef = useRef(null);
 
-  const atualizarNome = async () => {
-    if (!user) return alert("Usuário ainda não carregado.");
-    const novoNome = prompt("Digite o novo nome:", user.nome);
-    if (!novoNome) return;
-    const novoEmail = prompt("Digite o novo email:", user.email);
-    if (!novoEmail) return;
-    const novaSenha = prompt("Digite a sua nova senha ", user.senha);
 
-    await handleUpdate({ nome: novoNome, email: novoEmail, senha: novaSenha });
-    alert("Usuário atualizado!");
-  };
+  // const userToRender = user || beeUser; //teste sem usuario
+
+
+  // const atualizarNome = async () => {
+  //   if (!user) return alert("Usuário ainda não carregado.");
+  //   const novoNome = prompt("Digite o novo nome:", user.nome);
+  //   if (!novoNome) return;
+  //   const novoEmail = prompt("Digite o novo email:", user.email);
+  //   if (!novoEmail) return;
+  //   const novaSenha = prompt("Digite a sua nova senha ", user.senha);
+
+  //   await handleUpdate({ nome: novoNome, email: novoEmail, senha: novaSenha });
+  //   alert("Usuário atualizado!");
+  // };
 
   const atualizarImagem = async (e) => {
     const arquivo = e.target.files[0];
@@ -53,62 +71,41 @@ export default function DashboardSettings() {
   };
 
   return (
-    <div className="w-screen h-screen flex flex-col justify-center items-center">
-      <h1 className="font-bold text-2xl mb-4">
-        Teste de Integração com Backend
+    <div className="perfil-container">
+      <h1 className="titulo-configuracoes">
+        {/* Teste de Integração com Backend */}
+        Configurações de Perfil
       </h1>
 
-      {user ? (
+      {user ? (     //true para teste sem usuario
         <>
-          <div className="text-center mb-4">
-            <h2 className="font-semibold mb-2">Usuário Atual</h2>
-            <p>
-              <strong>Nome:</strong> {user.nome}
-            </p>
-            <p>
-              <strong>Email:</strong> {user.email}
-            </p>
 
-            <div className="relative w-24 aspect-square rounded-full overflow-hidden mx-auto mt-3">
-              <img
-                src={imageURL}
-                alt="Foto do usuário"
-                className="w-full h-full object-cover"
-              />
+          <UserProfileDisplay
+            user={user} 
+            //user={userToRender} //teste sem usuario
+            imageURL={imageURL}
+            fileInputRef={fileInputRef}
+            handleClickUpload={handleClickUpload}
+            atualizarImagem={atualizarImagem}
+          />
 
-              <button
-                onClick={handleClickUpload}
-                className="absolute bottom-0 right-0 bg-blue-600 text-white text-xs rounded-full p-1"
-              ></button>
-            </div>
+          <hr className="divisor-secao"/>
 
-            <input
-              type="file"
-              accept="image/*"
-              ref={fileInputRef}
-              onChange={atualizarImagem}
-              className="hidden"
-            />
-          </div>
+          <ProfileDataForm 
+            user={user} 
+            //user={userToRender} //teste sem usuario
+            handleUpdate={handleUpdate}
+          />
 
-          <div className="flex space-x-2">
-            <button
-              onClick={atualizarNome}
-              className="bg-green-600 text-white px-3 py-1 rounded"
-            >
-              Atualizar dados
-            </button>
+          <hr className="divisor-secao"/>
 
-            <button
-              onClick={deletarConta}
-              className="bg-red-600 text-white px-3 py-1 rounded"
-            >
-              Deletar conta
-            </button>
-          </div>
+          <DeleteAccountButton
+            deletarConta={deletarConta}
+          />
+          
         </>
       ) : (
-        <p>Carregando usuário...</p>
+        <p className="carregando">Carregando usuário...</p>
       )}
     </div>
   );
