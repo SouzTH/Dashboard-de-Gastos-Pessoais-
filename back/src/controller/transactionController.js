@@ -3,7 +3,7 @@ const transactionService = require("../services/transactionService.js");
 async function getAllTransactions(req, res) {
   try {
     const id = req.params.id
-    const idAuth = req.users.id
+    const idAuth = req.id
     
     if(Number(id) === Number(idAuth)){
       const transactions = await transactionService.getAllTransactions(id);
@@ -21,7 +21,7 @@ async function createTransaction(req, res) {
 
     //const newTransaction = await transactionService.createTransaction(transactionData);
 
-    const idAuth = req.users.id
+    const idAuth = req.id
 
     transactionData.userId = idAuth
 
@@ -41,7 +41,7 @@ async function createTransaction(req, res) {
 
 async function deleteTransaction(req, res) {
   try{
-    const idAuth = req.users.id
+    const idAuth = req.id
     const transactionId = req.params.id;
 
     const transactionAndUserId = {
@@ -60,18 +60,17 @@ async function deleteTransaction(req, res) {
 
 async function updateTransaction(req, res) {
   try {
-    const id = req.params.id;
-    const idAuth = req.users.id;
+    const id = Number(req.params.id);
+    const idAuth = Number(req.id);
     const updatedData = req.body;
     
-    updatedData.userId = idAuth;
-
-     const transaction = await transactionService.findTransactionById(id);
-    if (!transaction || transaction.id_do_usuario !== idAuth) {
-      return res.status(403).json({ message: "Atualização não permitida!!"});
+    const transaction = await transactionService.getTransaction(id);
+    if (!transaction || Number(transaction.id_do_usuario) !== Number(idAuth)) {
+      return res.status(403).json({ message: "Não autenticado ou a transação não existe."});
     }
 
-    const updatedTransaction = await transactionService.updateTransaction(id, updatedData);
+    updatedData.userId = idAuth;
+    const updatedTransaction = await transactionService.updateTransaction(id, updatedData, idAuth);
 
     return res.status(200).json({
       message: "Transação atualizada com sucesso!",

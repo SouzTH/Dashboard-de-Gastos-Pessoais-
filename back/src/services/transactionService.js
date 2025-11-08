@@ -12,6 +12,16 @@ async function getAllTransactions(id) {
   return transactions;
 }
 
+async function getTransaction(id){
+  const transaction = await knex("transacao").select("*").where({id: id}).first()
+  
+  if (transaction.length === 0){
+    throw new Error("Nenhuma transação encontrada")
+  }
+
+  return transaction
+}
+
 async function createTransaction(transactionData) {
   const {
     valor,
@@ -117,6 +127,7 @@ async function updateTransaction(id, updatedData, idAuth) {
 
 module.exports = {
   getAllTransactions,
+  getTransaction,
   createTransaction,
   deleteTransaction,
   updateTransaction,
