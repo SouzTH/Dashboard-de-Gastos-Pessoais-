@@ -1,4 +1,5 @@
 const transactionService = require("../services/transactionService.js");
+const autenticar = require("../middleware/auth.js");
 
 async function getAllTransactions(req, res) {
   try {
@@ -15,19 +16,35 @@ async function getAllTransactions(req, res) {
   }
 }
 
+async function getTransaction(req, res) {
+  try {
+    const transactionId = req.params.idTransacao;
+    const idAuth = req.id;
+    const idParam = Number(req.params.id);
+
+    if (idAuth !== idParam) {
+      return res.status(403).json({ message: "ID do usuário não corresponde ao ID autenticado." });
+    }
+    const transaction = await transactionService.getTransaction(transactionId);
+
+    if (transaction.id_do_usuario !== idAuth) {
+      return res.status(403).json({ message: "Você não tem permissão para acessar esta transação." });
+    }
+
+    return res.status(200).json({ transaction });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+}
+
 async function createTransaction(req, res) {
   try{
     const transactionData = req.body
 
     //const newTransaction = await transactionService.createTransaction(transactionData);
-
     const idAuth = req.id
-
-    transactionData.userId = idAuth
-
-    const newTransaction = await transactionService.createTransaction(transactionData);
-
-    //res.status(200).json({message: newTransaction});
+    const idParam = Number(req.params.id)
+    const newTransaction = await transactionService.createTransaction(idParam, transactionData, idAuth);
 
     return res.status(201).json({
       message: "Transação criada com sucesso!",
@@ -42,14 +59,13 @@ async function createTransaction(req, res) {
 async function deleteTransaction(req, res) {
   try{
     const idAuth = req.id
-    const transactionId = req.params.id;
+    const transactionId = req.params.idTransacao;
+    const idParam = Number(req.params.id)
 
-    const transactionAndUserId = {
-      id: transactionId,
-      idUser: idAuth
-    };
-
-    const result = await transactionService.deleteTransaction(transactionAndUserId);
+    if (idAuth !== idParam) {
+      return res.status(403).json({ message: "ID do usuário não corresponde ao ID autenticado." });
+    }
+    const result = await transactionService.deleteTransaction(transactionId, idAuth);
 
     return res.status(200).json({ message: result });
 
@@ -60,18 +76,24 @@ async function deleteTransaction(req, res) {
 
 async function updateTransaction(req, res) {
   try {
-    const id = Number(req.params.id);
-    const idAuth = Number(req.id);
+    const IDs = {
+      idTransacao: Number(req.params.idTransacao),
+      id: Number(req.params.id),
+      idAuth: Number(req.id),
+    } 
     const updatedData = req.body;
     
-    const transaction = await transactionService.getTransaction(id);
-    if (!transaction || Number(transaction.id_do_usuario) !== Number(idAuth)) {
-      return res.status(403).json({ message: "Não autenticado ou a transação não existe."});
+    if(IDs.id !== IDs.idAuth){
+      return res.status(403).json({ message: "ID do usuário não corresponde ao ID autenticado."});
     }
 
-    updatedData.userId = idAuth;
-    const updatedTransaction = await transactionService.updateTransaction(id, updatedData, idAuth);
+    const transaction = await transactionService.getTransaction(IDs.idTransacao);
+    if (!transaction || transaction.id_do_usuario !== IDs.idAuth) {
+      return res.status(403).json({ message: "Não autenticado ou sem transação."});
+    }
 
+    updatedData.userId = IDs.idAuth;
+    const updatedTransaction = await transactionService.updateTransaction(IDs.idTransacao,updatedData, IDs.idAuth);
     return res.status(200).json({
       message: "Transação atualizada com sucesso!",
       transacao: updatedTransaction
@@ -83,6 +105,7 @@ async function updateTransaction(req, res) {
 
 module.exports = {
   getAllTransactions,
+  getTransaction,
   createTransaction,
   deleteTransaction,
   updateTransaction,

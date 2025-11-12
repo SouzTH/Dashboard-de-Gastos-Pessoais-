@@ -12,17 +12,31 @@ async function getAllTransactions(id) {
   return transactions;
 }
 
-async function getTransaction(id){
-  const transaction = await knex("transacao").select("*").where({id: id}).first()
+async function getTransaction(idTransacao){
+  const transaction = await knex("transacao").select("*").where({id: idTransacao}).first()
   
-  if (transaction.length === 0){
-    throw new Error("Nenhuma transação encontrada")
+  if (!transaction){
+    throw new Error("A transação não foi encontrada.");
   }
 
   return transaction
 }
 
-async function createTransaction(transactionData) {
+async function createTransaction(paramId, transactionData, idAuth) {
+/*
+é passado um json no formato:
+{
+  "valor": 150.75,
+  "tipo_de_transacao": "despesa",
+  "data_transacao": "2025-10-25",
+  "descricao": "Compra de material de escritório",
+  "categoria": "Escritório",
+  "conta": "Cartão Corporativo",
+  "id_do_grupo": 12,
+  "id_do_usuario": 42
+}
+*/
+
   const {
     valor,
     tipo_de_transacao,
@@ -31,8 +45,9 @@ async function createTransaction(transactionData) {
     categoria,
     conta,
     id_do_grupo,
-    id_do_usuario, 
   } = transactionData || {};
+
+  const id_do_usuario = idAuth;
 
   if (!tipo_de_transacao || !categoria || !conta) {
     throw new Error("Campos obrigatórios: 'tipo', 'categoria' e 'conta'.");
@@ -41,7 +56,9 @@ async function createTransaction(transactionData) {
   if (typeof valor !== "number" || valor < 0) {
     throw new Error("O campo 'valor' deve ser um número positivo.");
   }
-
+  if (Number.isInteger(idAuth) !== Number.isInteger(paramId) || idAuth !== paramId) {
+    throw new Error("ID do usuário não corresponde ao ID autenticado.");
+  }
   if (!Number.isInteger(id_do_usuario) || id_do_usuario <= 0) {
     throw new Error("ID do usuário inválido.");
   }
@@ -64,12 +81,12 @@ async function createTransaction(transactionData) {
   return transactionData;
 }
 
-async function deleteTransaction(transactionIdData) {
+async function deleteTransaction(idTransacao, idAuth) {
   const linhasDeletadas = await knex("transacao")
     .delete()
     .where({
-      id: transactionIdData.id,
-      id_do_usuario: transactionIdData.idUser,
+      id: idTransacao,
+      id_do_usuario: idAuth,
     });
 
   if (linhasDeletadas === 0) {
@@ -79,9 +96,9 @@ async function deleteTransaction(transactionIdData) {
   return "Transação deletada com sucesso.";
 }
 
-async function updateTransaction(id, updatedData, idAuth) {
+async function updateTransaction(idTransacao, updatedData, idAuth) {
   
-  const busca = await knex("transacao").where({ id }).first();
+  const busca = await knex("transacao").where({ id: idTransacao }).first();
 
   if (!busca) {
     throw new Error("Transação não encontrada.");
@@ -120,7 +137,7 @@ async function updateTransaction(id, updatedData, idAuth) {
     id_do_grupo,
   };
 
-  await knex("transacao").update(newTransaction).where({ id });
+  await knex("transacao").update(newTransaction).where({ id: idTransacao });
 
   return newTransaction;
 }
