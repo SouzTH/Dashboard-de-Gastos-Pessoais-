@@ -38,8 +38,25 @@ async function deleteTransaction(req, res) {
   }
 }
 
+async function updateTransaction(req, res) {
+  try {
+    const id = req.params.id;
+    const updatedData = req.body;
+
+    const updatedTransaction = await transactionService.updateTransaction(id, updatedData);
+
+    return res.status(200).json({
+      message: "Transação atualizada com sucesso!",
+      transacao: updatedTransaction
+    });
+  } catch (err) {
+    return res.status(500).json({ message: err.message });
+  }
+}
+
 module.exports = {
   getAllTransactions,
   createTransaction,
   deleteTransaction,
+  updateTransaction,
 }

@@ -1,24 +1,24 @@
-import { useState, useEffect, useContext } from "react";
+import { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
-import { AuthContext } from "../context/AuthContext";
+//import axios from "axios";
+import { UserContext } from "../context/UserContext";
 import InputField from "../components/inputField";
 import Button from "../components/button";
 import Checkbox from "../components/checkBox";
 import "../style/login.css";
 import { NavLink } from "react-router-dom";
+//import { AuthContext } from "../context/AuthContext";
 
 export default function Login() {
-  const [email, setEmail] = useState("");
-  const [senha, setSenha] = useState("");
-  const [lembrar, setLembrar] = useState(false);
-  const { login } = useContext(AuthContext);
   const navigate = useNavigate();
+
+  const { email, setEmail, senha, setSenha, lembrar, setLembrar, loginUser } =
+    useContext(UserContext);
 
   useEffect(() => {
     const savedEmail = localStorage.getItem("email");
     if (savedEmail) setEmail(savedEmail);
-  }, []);
+  }, [setEmail]);
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -29,53 +29,44 @@ export default function Login() {
     }
 
     try {
-      const response = await axios.post("http://localhost:8000/login", {
-        email,
-        senha,
-      });
+      const resposta = await loginUser();
 
-      const { token, user } = response.data;
-      login(user, token);
+      console.log("Usuário logado com sucesso!", resposta);
 
       if (lembrar) localStorage.setItem("email", email);
       else localStorage.removeItem("email");
-
-      navigate("/dashboard");
+      console.log("passou no login");
+      navigate("/dashboard/settings");
     } catch (err) {
-      alert("Email ou senha incorretos!");
+      console.error("Erro ao logar:", err);
+      alert("Falha ao logar!");
     }
   };
 
   return (
     <div className="login-page">
-      <div className="login-card" role="main" aria-labelledby="login-title">
-        <h1 id="login-title" className="login-title">
-          Acesse sua conta
-        </h1>
+      <div className="login-card">
+        <h1 className="login-title">Acesse sua conta</h1>
 
         <form className="login-form" onSubmit={handleLogin}>
           <InputField
             id="email"
             label="Email"
             type="email"
-            name="email"
             placeholder="seu@email.com"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
-            className="login-input"
           />
 
           <InputField
             id="password"
             label="Senha"
             type="password"
-            name="password"
             placeholder="Sua senha"
             value={senha}
             onChange={(e) => setSenha(e.target.value)}
             required
-            className="login-input"
           />
 
           <div className="login-row">
@@ -84,11 +75,10 @@ export default function Login() {
               checked={lembrar}
               onChange={() => setLembrar(!lembrar)}
               label="Lembre-se de mim"
-              className="login-checkbox"
             />
-            <a href="/forgot" className="link-small">
+            <NavLink to="/forgot" className="link-small">
               Esqueceu sua senha?
-            </a>
+            </NavLink>
           </div>
 
           <Button type="submit" className="login-button">

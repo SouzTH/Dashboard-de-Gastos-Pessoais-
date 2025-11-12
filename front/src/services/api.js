@@ -4,8 +4,6 @@ const api = axios.create({
   baseURL: apiUrl, //colocar no .env
 });
 
-export const backendURL = apiUrl; //usado no front tela Settings
-
 api.interceptors.request.use((config) => {
   const token = localStorage.getItem("token");
   if (token) {
@@ -14,12 +12,23 @@ api.interceptors.request.use((config) => {
   return config;
 });
 
-// Funções para acessar o backend
+export const loginUsuario = (email, senha) =>
+  api.post(`/login`, { email, senha });
+
+export const cadastrarUsuario = async (nome, email, senha) => {
+  console.log("no api.js");
+  return api.post(`/criar/usuario`, { nome, email, senha });
+};
+
 export const getUser = async (id) => {
+  console.log("Entrei no get user:" +  api.get(`/ver/usuario/${id}`))
   return api.get(`/ver/usuario/${id}`);
 };
+
 export const updateUser = (id, data) =>
   api.patch(`/atualizar/usuario/${id}`, data);
+
 export const deleteUser = (id) => api.delete(`/deletar/usuario/${id}`);
 
+export const backendURL = apiUrl;
 export default api;

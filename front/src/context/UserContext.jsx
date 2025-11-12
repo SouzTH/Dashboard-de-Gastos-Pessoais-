@@ -1,13 +1,23 @@
+// src/context/UserContext.jsx
 import { createContext, useState, useEffect } from "react";
-import { getUser, updateUser, deleteUser } from "../services/api";
+import { loginUsuario, cadastrarUsuario, getUser, deleteUser, updateUser } from "../services/api";
 import api from "../services/api";
 import { jwtDecode } from "jwt-decode";
+
 // eslint-disable-next-line react-refresh/only-export-components
 export const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
+  const [nome, setNome] = useState("");
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(null);
+  const [email, setEmail] = useState("");
+  const [senha, setSenha] = useState("");
+  const [password, setPassword] = useState("");
+  const [password2, setPassword2] = useState("");
+  const [lembrar, setLembrar] = useState(false);
+
+  //email, setEmail, senha, setSenha, lembrar, setLembrar
 
   //  Sempre que o token mudar, atualiza Axios e busca o usuário
   useEffect(() => {
@@ -109,22 +119,55 @@ export const UserProvider = ({ children }) => {
     }
   };
 
-  //criar usuario
-
   //logar usuario
+  const loginUser = async () => {
+    try {
+      const response = await loginUsuario(email, senha);
 
-  //deslogar usuario
+      setToken(response.data.token);
+      console.log("Cheguei no final do loginUser");
+      return response;
+    } catch (err) {
+      alert("Email ou senha incorretos!");
+      console.log("Erro ao logal", err);
+    }
+  };
+
+  const CriarUsuario = async () => {
+    try {
+      const response = await cadastrarUsuario(nome, email, password);
+
+      console.log("usuario cadastrado com sucesso! Usar o Toastfy!!", response);
+    } catch (err) {
+      console.log("Erro ao cadastrar", err);
+    }
+  };
 
   return (
     <UserContext.Provider
       value={{
         user,
         token,
-        loadUser,
         setUser,
         setToken,
+        loginUser,
+        CriarUsuario,
+        email,
+        senha,
+        setEmail,
+        password,
+        setPassword,
+        password2,
+        setPassword2,
+        nome,
+        setNome,
+        setSenha,
+        setLembrar,
+        lembrar,
+        getUser,
+        loadUser,
         handleUpdate,
-        handleDelete,
+        handleDelete
       }}
     >
       {children}
