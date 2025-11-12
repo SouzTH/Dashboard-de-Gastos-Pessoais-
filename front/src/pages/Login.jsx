@@ -12,7 +12,6 @@ import { NavLink } from "react-router-dom";
 export default function Login() {
   const navigate = useNavigate();
 
-  // ✅ pega tudo de uma vez só do contexto
   const { email, setEmail, senha, setSenha, lembrar, setLembrar, loginUser } =
     useContext(UserContext);
 
@@ -36,8 +35,8 @@ export default function Login() {
 
       if (lembrar) localStorage.setItem("email", email);
       else localStorage.removeItem("email");
-
-      navigate("/teste");
+      console.log("passou no login");
+      navigate("/dashboard/settings");
     } catch (err) {
       console.error("Erro ao logar:", err);
       alert("Falha ao logar!");
@@ -77,9 +76,9 @@ export default function Login() {
               onChange={() => setLembrar(!lembrar)}
               label="Lembre-se de mim"
             />
-            <a href="/forgot" className="link-small">
+            <NavLink to="/forgot" className="link-small">
               Esqueceu sua senha?
-            </a>
+            </NavLink>
           </div>
 
           <Button type="submit" className="login-button">

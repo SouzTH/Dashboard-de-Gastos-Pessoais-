@@ -8,7 +8,8 @@ exports.up = function (knex) {
     table.increments("id").unsigned(),
     table.double("valor").notNullable().unsigned(),
     table.string("tipo_de_transacao").notNullable(),
-    table.date("data_transacao").defaultTo(knex.fn.now()),
+    //table.date("data_transacao").defaultTo(knex.fn.now()), para, ao não adicionar data, guardar a data atual do pc.
+    table.date("data_transacao"),
     table.string("descricao").nullable(),
     table.string("categoria").notNullable(),
     table.string("conta").notNullable(),

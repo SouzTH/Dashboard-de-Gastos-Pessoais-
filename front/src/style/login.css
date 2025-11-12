@@ -24,7 +24,7 @@
   font-size: 1.5rem;
   color: #111827;
   font-weight: 600;
-  margin-bottom: 1.5rem;
+  margin-bottom: 0.1rem;
   text-align: left;
 }
 
@@ -59,9 +59,9 @@
 .login-page label {
   display: block !important;
   font-size: 0.875rem !important;
-  font-weight: 500 !important;
-  color: #374151 !important;
-  margin-bottom: 0.25rem !important;
+  font-weight: 600 !important; 
+  color: #1f1f1f !important;   
+  margin-bottom: 0.35rem !important;
 }
 
 
@@ -71,8 +71,15 @@
   border-radius: 4px !important;
   border: 1px solid #d1d5db !important;
   margin-right: 8px !important;
+  accent-color: #6b46c1; 
 }
 
+.checkbox-label {
+  font-size: 0.875rem;
+  color: #1f1f1f;
+  font-weight: 600; 
+  align-items: center;
+}
 
 .login-page button.login-button {
   width: 100% !important;
@@ -117,16 +124,24 @@
   color: #6b7280;
   margin-top: 1.5rem;
   padding-top: 1.5rem;
- 
+ font-weight: 500;
 }
+.signup-row span {
+  font-size: 0.875rem;   
+  font-weight: 600;     
+  color: #1f1f1f;        
+}
+
 
 .link-signup {
   text-decoration: none;
   color: #7c3aed;
   font-weight: 600;
   margin-left: 4px;
+  transition: color 0.2s;
 }
 
 .link-signup:hover {
   text-decoration: underline;
+  color: #553c9a;
 }

@@ -1,3 +1,4 @@
+
 const knex = require("../database/export")
 
 async function getAllTransactions(id){
@@ -69,8 +70,61 @@ async function deleteTransaction(transactionIdData) {
     return "Transação foi deletada com sucesso.";
 }
 
+async function updateTransaction(id, updatedData) {
+  try {
+    const busca = await knex("transacao")
+      .select("*")
+      .where({ id })
+      .first();
+    if (!busca) {
+      throw new Error("Transação não encontrada.");
+    }
+
+    const {
+      valor,
+      tipo_de_transacao,
+      data_transacao,
+      descricao,
+      categoria,
+      conta,
+      id_do_grupo,
+      id_do_usuario,
+    } = updatedData || {};
+
+    if (!valor || !tipo_de_transacao || !categoria || !conta) {
+      throw new Error("Todos os campos obrigatórios devem ser preenchidos.");
+    }
+    if (typeof valor !== "number" || valor < 0) {
+      throw new Error("O campo 'valor' deve ser um número positivo.");
+    }
+    if (!Number.isInteger(id_do_usuario) || id_do_usuario <= 0) {
+      throw new Error("O campo 'id_do_usuario' deve ser um número inteiro positivo.");
+    }
+
+    const newTransaction = {
+      valor,
+      tipo_de_transacao,
+      data_transacao,
+      descricao,
+      categoria,
+      conta,
+      id_do_grupo,
+      id_do_usuario,
+    };
+
+    await knex("transacao")
+      .update(newTransaction)
+      .where({ id });
+    
+    return newTransaction;
+  } catch (err) {
+    throw new Error("Não foi possível atualizar a transação: " + err.message);
+  }
+}
+
 module.exports = {
     getAllTransactions,
     createTransaction,
     deleteTransaction,
+    updateTransaction,
 }
