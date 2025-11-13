@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import "../style/ConfiguracoesPerfil.css";
+import { toast } from "react-toastify";
 
 //user pra preencher e handle pra salvar eles
 export default function ProfileDataForm({ user, handleUpdate }) {
+  const [userSalvo, setUserSalvo] = useState(user);
   const [formData, setFormData] = useState({
     nome: user.nome || "",
     email: user.email || "",
@@ -29,16 +31,49 @@ export default function ProfileDataForm({ user, handleUpdate }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    //objeto para armazenar as mudanças, e no final enviar quando
+    //o usuario clicar no botão enviar
+    const atualizacaoCampos = {};
+
+    if (formData.nome !== userSalvo.nome) {
+      if (formData.nome == "") {
+        return toast.warn("O Nome não pode ser vazio.");
+      }
+      atualizacaoCampos.nome = formData.nome;
+    }
+
+    if (formData.email !== userSalvo.email) {
+      if (formData.email == "") {
+        return toast.warn("O E-mail não pode ser vazio.");
+      }
+      atualizacaoCampos.email = formData.email;
+    }
+
+    if (formData.senha) {
+      if (formData.senha.trim() == "") {
+        return toast.warn("A senha não pode ser vazia.");
+      }
+      atualizacaoCampos.senha = formData.senha;
+    }
+    /*
     if (!formData.nome || !formData.email) {
       return alert("Nome e email são obrigatórios.");
+    }*/
+
+    //verifica se o objeto atualizacaoCampos é vazio
+    if (Object.keys(atualizacaoCampos).length === 0) {
+      return toast.warn("Nenhuma alteração detectada!");
     }
 
     try {
-      await handleUpdate(formData);
-      alert("Perfil atualizado com sucesso!");
+      await handleUpdate(atualizacaoCampos);
+
+      setFormData((prev) => ({ ...prev, senha: "" }));
+
+      toast.success("Perfil atualizado com sucesso!");
     } catch (error) {
       console.error("Erro ao atualizar perfil:", error);
-      alert("Erro ao salvar perfil.");
+      toast.error("Falha ao atualizar perfil!");
     }
   };
 
