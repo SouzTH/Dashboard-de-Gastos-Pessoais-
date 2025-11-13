@@ -1,42 +1,61 @@
+import { useContext } from "react";
 import { Outlet } from "react-router";
-import { NavLink, Link } from "react-router";
-import imgExemplo from "../../src/assets/react.svg";
+import { NavLink, Link } from "react-router-dom";
+import { UserContext } from "../context/UserContext";
+import { backendURL } from "../services/api";
+
+import '../style/SideBar.css';
+
+import { MdDashboard, MdPeople, MdCompareArrows, MdSettings } from 'react-icons/md';
+
+const ImagemPadrao = "https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y";
+
 function DashboardLayout() {
+  const { user } = useContext(UserContext);
+  
+  const profileImgUrl = user && user.foto 
+    ? `${backendURL}${user.foto}` 
+    : ImagemPadrao;
+
   //OBS PARA OS BOTÕES: irão virar uma função map() com as rotas corretas pra cada site!
+
   return (
     <>
-      <div className="flex flex-row">
-        <div className="w-1/4 bg-gray-600 text-white flex flex-col h-screen justify-around p-6 rounded-r-2xl">
-          <div className="flex flex-col justify-center items-center h-1/4 space-y-2">
+      <div className="layout-container">
+        <div className="sidebar">
+
+          <div className="sidebar-logo">
+            <Link to="/" className="logo-link">
+              <h2>MyBudget</h2>
+            </Link>
+          </div>
+          
+          <div className="menu-conta">
             <img
-              className="w-24 h-24 bg-white p-2 rounded-full"
-              src={imgExemplo}
-            />
-            <NavLink
-              to="settings"
-              className="rounded-3xl bg-gray-500 border-gray-500 p-2 text-center"
-            >
-              Minha Conta
+              className="perfil-imagem"
+              src={profileImgUrl || ImagemPadrao}/>
+
+            <NavLink to="settings" className="botao">
+              <MdSettings size={24} className="menu-icone" />
+              <span className="menu-link-texto">Minha Conta</span>
             </NavLink>
           </div>
-          <div className="flex flex-col justify-center gap-y-10 space-y-2">
-            <NavLink
-              to=""
-              className="rounded-3xl bg-gray-500 border-gray-500 p-2 text-center"
-            >
-              Dashboard
+
+          <div className="menu-navegacao">
+
+            <NavLink to="dashboard" className="botao">
+              <MdDashboard size={24} className="menu-icone" />
+              <span className="menu-link-texto">Dashboard</span>
             </NavLink>
-            <NavLink
-              to="team"
-              className="rounded-3xl bg-gray-500 border-gray-500 p-2 text-center"
-            >
-              Equipe
+
+            <NavLink to="team" className="botao">
+              <MdPeople size={24} className="menu-icone" />
+              <span className="menu-link-texto">Equipe</span>
             </NavLink>
-            <NavLink
-              to="transaction"
-              className="rounded-3xl bg-gray-500 border-gray-500 p-2 text-center"
-            >
-              Transação
+
+            <NavLink to="transaction" className="botao">
+              <MdCompareArrows size={24} className="menu-icone" />
+              <span className="menu-link-texto">Transação</span>
             </NavLink>
             
           </div>
