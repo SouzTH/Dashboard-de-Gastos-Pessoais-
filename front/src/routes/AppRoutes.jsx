@@ -6,10 +6,12 @@ import DashboardHome from "../pages/DashboardHome";
 import DashboardSettings from "../pages/DashboardSettings";
 import DashboardTeam from "../pages/DashboardTeam";
 import DashboardTransaction from "../pages/DashboardTransaction";
+import Index from "../pages/Index.jsx"
 
 export default function AppRoutes() {
   return (
     <Routes>
+      <Route path="/" element={<Index />} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route path="/dashboard" element={<DashboardLayout />}>

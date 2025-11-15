@@ -9,6 +9,7 @@ import ProfileDataForm from "../components/ProfileDataForm.jsx";
 import DeleteAccountButton from "../components/DeleteAccountButton.jsx";
 
 import "../style/ConfiguracoesPerfil.css";
+import { Route } from "react-router";
 
 // const beeUser = {  //teste sem usuario
 //      nome: "Bee Teste",
@@ -21,21 +22,7 @@ export default function DashboardSettings() {
   const imageURL = user && user.foto ? `${backendURL}${user.foto}` : null;
   const fileInputRef = useRef(null);
 
-
-  // const userToRender = user || beeUser; //teste sem usuario
-
-
-  // const atualizarNome = async () => {
-  //   if (!user) return alert("Usuário ainda não carregado.");
-  //   const novoNome = prompt("Digite o novo nome:", user.nome);
-  //   if (!novoNome) return;
-  //   const novoEmail = prompt("Digite o novo email:", user.email);
-  //   if (!novoEmail) return;
-  //   const novaSenha = prompt("Digite a sua nova senha ", user.senha);
-
-  //   await handleUpdate({ nome: novoNome, email: novoEmail, senha: novaSenha });
-  //   alert("Usuário atualizado!");
-  // };
+  //const userToRender = user || beeUser; //teste sem usuario
 
   const atualizarImagem = async (e) => {
     const arquivo = e.target.files[0];
@@ -73,7 +60,6 @@ export default function DashboardSettings() {
   return (
     <div className="perfil-container">
       <h1 className="titulo-configuracoes">
-        {/* Teste de Integração com Backend */}
         Configurações de Perfil
       </h1>
 
@@ -105,6 +91,7 @@ export default function DashboardSettings() {
           
         </>
       ) : (
+        // linkar para pagina inicial ou de cadastro
         <p className="carregando">Carregando usuário...</p>
       )}
     </div>

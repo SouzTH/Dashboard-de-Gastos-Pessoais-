@@ -1,10 +1,10 @@
 :root {  
   --fundo-gradiente-inicio: #E1CCF7;
-  --fundo-gradiente-meio: #D8E8EC;
+  --fundo-gradiente-meio: #d8ece6;
   --fundo-gradiente-fim: #F5E8FB; 
 
-  --cor-fundo-card: #ede9fe;
-  --cor-borda-card: #856C97;
+  --cor-fundo-card: white;
+  --cor-borda-card: black;
 
   --texto-titulo: #4c1d95;
   --cor-link: #7c3aed;
@@ -47,12 +47,12 @@
 }
 
 .login-title {
-  font-size: 1.5rem;
-  color: var(--texto-titulo);
-  font-weight: bold;
-  margin-top: 2.5rem;
-  margin-bottom: 2.5rem;
+  font-size: 2rem;
   text-align: center;
+  margin-top: 2rem;
+  margin-bottom: 1rem; 
+  color: black;
+  font-weight: 600;
 }
 
 .login-form {

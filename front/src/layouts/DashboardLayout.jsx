@@ -10,6 +10,8 @@ import { MdDashboard, MdPeople, MdCompareArrows, MdSettings } from 'react-icons/
 
 const ImagemPadrao = "https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y";
 
+import LogoImage from '../assets/logo.png';
+
 function DashboardLayout() {
   const { user } = useContext(UserContext);
   
@@ -26,7 +28,12 @@ function DashboardLayout() {
 
           <div className="sidebar-logo">
             <Link to="/" className="logo-link">
-              <h2>MyBudget</h2>
+              <img 
+                src={LogoImage} 
+                alt="Logo MyBudget"
+                className="logo-icon"
+              />
+              <span className="menu-link-texto">MyBudget</span>
             </Link>
           </div>
           
@@ -40,7 +47,9 @@ function DashboardLayout() {
               <span className="menu-link-texto">Minha Conta</span>
             </NavLink>
           </div>
-
+          <div className="space">
+            
+          </div>
           <div className="menu-navegacao">
 
             <NavLink to="dashboard" className="botao">
@@ -55,7 +64,7 @@ function DashboardLayout() {
 
             <NavLink to="transaction" className="botao">
               <MdCompareArrows size={24} className="menu-icone" />
-              <span className="menu-link-texto">Transação</span>
+              <span className="menu-link-texto">Transações</span>
             </NavLink>
             
           </div>
