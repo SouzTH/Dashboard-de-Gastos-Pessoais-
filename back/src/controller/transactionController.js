@@ -1,5 +1,6 @@
 const transactionService = require("../services/transactionService.js");
 const autenticar = require("../middleware/auth.js");
+const { get } = require("../routes/transactionRoutes.js");
 
 async function getAllTransactions(req, res) {
   try {
@@ -103,9 +104,27 @@ async function updateTransaction(req, res) {
   }
 }
 
+async function getDashboardData(req, res) {
+  try {
+    const id = req.params.id;
+    const idAuth = req.id;
+
+    if (Number(id) !== Number(idAuth)) {
+      return res.status(403).json({ message: "O ID inserido não corresponde ao usuário logado." });
+    }
+
+    const dashboardData = await transactionService.getAggregatedDashboardData(id);
+
+    return res.status(200).json(dashboardData);
+  } catch (err) {
+    console.error("Erro ao buscar dados do dashboard:", err);
+    return res.status(500).json({message: "Erro no processamento de  dados do dashboard."});
+  } 
+}
 module.exports = {
   getAllTransactions,
   getTransaction,
+  getDashboardData,
   createTransaction,
   deleteTransaction,
   updateTransaction,

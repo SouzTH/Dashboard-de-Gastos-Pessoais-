@@ -142,9 +142,55 @@ async function updateTransaction(idTransacao, updatedData, idAuth) {
   return newTransaction;
 }
 
+async function getAggregatedDashboardData(userId) {
+    // 1. DADOS DO GRÁFICO DE PIZZA (Saídas por Categoria)
+    // Agrupa por 'categoria' e soma o 'valor' apenas para transações de 'despesa'
+    const pizzaData = await knex("transacao")
+        .select("categoria")
+        .sum("valor as total")
+        .where({
+            id_do_usuario: userId,
+            tipo_de_transacao: "despesa"
+        })
+        .groupBy("categoria")
+        .orderBy("total", "desc");
+
+    // Mapeia para o formato que o Highcharts espera: [{name: 'Cat', y: total}]
+    const formattedPizzaData = pizzaData.map(item => ({
+        name: item.categoria,
+        y: parseFloat(item.total) // Converte para número de ponto flutuante
+    }));
+
+    // 2. DADOS DO GRÁFICO DE BARRAS/LINHAS (Entradas e Saídas por Mês)
+    // Usando knex.raw para extrair o mês do campo data_transacao (idealmente no formato 'YYYY-MM-DD')
+    const monthlyData = await knex("transacao")
+        .select(
+            knex.raw('DATE_FORMAT(data_transacao, "%Y-%m") as mes_ano'), 
+            knex.raw('SUM(CASE WHEN tipo_de_transacao = "receita" THEN valor ELSE 0 END) as entradas'),
+            knex.raw('SUM(CASE WHEN tipo_de_transacao = "despesa" THEN valor ELSE 0 END) as saidas')
+        )
+        .where({ id_do_usuario: userId })
+        .groupBy("mes_ano")
+        .orderBy("mes_ano", "asc");
+
+    // 3. DADOS DO HISTÓRICO (Últimas 5 Transações)
+    const historyData = await knex("transacao")
+        .select("valor", "tipo_de_transacao", "descricao", "data_transacao", "categoria")
+        .where({ id_do_usuario: userId })
+        .orderBy("data_transacao", "desc")
+        .limit(5);
+
+    return {
+        pizza: formattedPizzaData,
+        mensal: monthlyData,
+        historico: historyData,
+    };
+}
+
 module.exports = {
   getAllTransactions,
   getTransaction,
+  getAggregatedDashboardData,
   createTransaction,
   deleteTransaction,
   updateTransaction,
