@@ -1,13 +1,20 @@
 import { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
+
 //import axios from "axios";
 import { UserContext } from "../context/UserContext";
 import InputField from "../components/inputField";
 import Button from "../components/button";
 import Checkbox from "../components/checkBox";
+
+import LogoImage from '../assets/logo.png';
+import HomeLinkLogo from '../components/HomeLogoLink';
 import "../style/login.css";
+
 import { NavLink } from "react-router-dom";
 import { toast } from "react-toastify";
+
 //import { AuthContext } from "../context/AuthContext";
 
 export default function Login() {
@@ -49,15 +56,16 @@ export default function Login() {
 
   return (
     <div className="login-page">
+      <HomeLinkLogo logoSrc={LogoImage} />
       <div className="login-card">
-        <h1 className="login-title">Acesse sua conta</h1>
+        <h1 className="login-title">Acesse sua conta!</h1>
 
         <form className="login-form" onSubmit={handleLogin}>
           <InputField
             id="email"
             label="Email"
             type="email"
-            placeholder="seu@email.com"
+            placeholder="Seu@email.com"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required

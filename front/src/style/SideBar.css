@@ -1,0 +1,107 @@
+:root {
+    --sidebar-padrao: 6rem; 
+    --sidebar-expandida: 260px; 
+    --sidebar-bg-color: white;
+
+    --fundo-gradiente-inicio: #E1CCF7;
+    --fundo-gradiente-meio: #d8ece6;
+    --fundo-gradiente-fim: #F5E8FB;
+}
+
+.layout-container {
+    display: grid;
+    grid-template-columns: var(--sidebar-padrao) 1fr;
+    min-height: 100vh;
+    width: 100%;
+    font-family: 'Inter', sans-serif;
+    transition: grid-template-columns 0.3s ease-in-out; 
+    /*transicao para suavizar a mudanca*/
+}
+
+.layout-container:has(.sidebar:hover) {
+    grid-template-columns: var(--sidebar-expandida) 1fr;
+    /*Quando o .layout-container TIVER (has) um .sidebar em hover, ele muda a estrutura do grid para usar a largura expandida (260px) + 1fr.
+    isso tudo pra pagina comecar depois da side bar*/
+}
+
+.sidebar {
+    top: 0;
+    height: 100vh;
+    width: var(--sidebar-padrao);
+    background-color: var(--sidebar-bg-color); 
+    color: var(--text-color);
+    padding: 2rem 1rem; 
+    transition: width 0.3s ease-in-out; 
+    overflow-x: hidden; 
+    border: 0.10px solid rgb(201, 201, 201);
+}
+
+.sidebar:hover {
+    width: var(--sidebar-expandida); 
+}
+
+.menu-navegacao {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem; /* Espaçamento entre os botões */
+    padding-top: 3rem;
+}
+
+.botao {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    border-radius: 9999px;
+    gap: 1rem;
+    padding: 10px 15px; 
+    border: 0.10px solid  rgb(201, 201, 201);
+}
+
+.botao:hover {
+    opacity: 1;
+    background-color: #f6f3fa;
+}
+
+.perfil-imagem {
+    width: 3.5rem;
+    height: 3.5rem;
+    border-radius: 9999px;
+    object-fit: cover;
+    overflow: hidden;
+    margin: 2px;
+    border: 0.10px solid  rgb(78, 161, 113);
+    margin-top: 50px;
+    margin-bottom: 30px;
+}
+
+.menu-icone {
+    color: #7818DB;
+    flex-shrink: 0;
+}
+
+.menu-link-texto{
+    opacity: 0; 
+    white-space: nowrap; 
+    transition: opacity 0.2s ease-in-out;
+    font-family: 'Inter', sans-serif;
+}
+
+.sidebar:hover .menu-link-texto {
+    opacity: 1; 
+    transition-delay: 0.15s;
+}
+
+.sidebar-logo{
+    align-items: center;
+    justify-content: center;
+    color: white;
+    padding: 5px;
+}
+.logo-icon{
+    width: 100px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+}

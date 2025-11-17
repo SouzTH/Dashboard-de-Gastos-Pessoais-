@@ -11,6 +11,7 @@ import ProfileDataForm from "../components/ProfileDataForm.jsx";
 import DeleteAccountButton from "../components/DeleteAccountButton.jsx";
 
 import "../style/ConfiguracoesPerfil.css";
+import { Route } from "react-router";
 
 // const beeUser = {  //teste sem usuario
 //      nome: "Bee Teste",
@@ -84,7 +85,6 @@ export default function DashboardSettings() {
   return (
     <div className="perfil-container">
       <h1 className="titulo-configuracoes">
-        {/* Teste de Integração com Backend */}
         Configurações de Perfil
       </h1>
 
@@ -112,6 +112,7 @@ export default function DashboardSettings() {
           <DeleteAccountButton deletarConta={deletarConta} />
         </>
       ) : (
+        // linkar para pagina inicial ou de cadastro
         <p className="carregando">Carregando usuário...</p>
       )}
     </div>
