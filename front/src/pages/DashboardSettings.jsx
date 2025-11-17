@@ -3,6 +3,8 @@
 import { useContext, useRef } from "react";
 import { UserContext } from "../context/UserContext";
 import { backendURL } from "../services/api";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 import UserProfileDisplay from "../components/UserProfileDisplay.jsx";
 import ProfileDataForm from "../components/ProfileDataForm.jsx";
@@ -13,17 +15,16 @@ import "../style/ConfiguracoesPerfil.css";
 // const beeUser = {  //teste sem usuario
 //      nome: "Bee Teste",
 //      email: "bee@teste.com",
-//  };
+// };
 
 export default function DashboardSettings() {
   const { user, handleUpdate, handleDelete } = useContext(UserContext);
+  const navigate = useNavigate();
 
   const imageURL = user && user.foto ? `${backendURL}${user.foto}` : null;
   const fileInputRef = useRef(null);
 
-
   // const userToRender = user || beeUser; //teste sem usuario
-
 
   // const atualizarNome = async () => {
   //   if (!user) return alert("Usuário ainda não carregado.");
@@ -49,11 +50,13 @@ export default function DashboardSettings() {
 
     try {
       await handleUpdate(formData);
-      alert("Imagem atualizada com sucesso!");
+      toast.success("Imagem atualizada com sucesso!");
+      //alert("Imagem atualizada com sucesso!");
       e.target.value = null;
     } catch (err) {
       console.error("Erro ao atualizar imagem:", err);
-      alert("Erro ao atualizar imagem!");
+      //alert("Erro ao atualizar imagem!");
+      toast.error("Erro ao atualizar imagem!");
     }
   };
 
@@ -64,9 +67,17 @@ export default function DashboardSettings() {
   // Deletar conta
   const deletarConta = async () => {
     const confirma = confirm("Tem certeza que deseja excluir?");
+
     if (confirma) {
-      await handleDelete();
-      alert("Conta excluída com sucesso!");
+      try {
+        await handleDelete();
+        //alert("Conta excluída com sucesso!");
+        navigate("/login");
+        toast.error("Conta excluída com sucesso!");
+      } catch (error) {
+        console.error("Erro ao tentar excluir a conta:", error);
+        toast.error("Erro ao excluir a conta. Tente novamente.");
+      }
     }
   };
 
@@ -77,11 +88,10 @@ export default function DashboardSettings() {
         Configurações de Perfil
       </h1>
 
-      {user ? (     //true para teste sem usuario
+      {user ? ( //true para teste sem usuario
         <>
-
           <UserProfileDisplay
-            user={user} 
+            user={user}
             //user={userToRender} //teste sem usuario
             imageURL={imageURL}
             fileInputRef={fileInputRef}
@@ -89,20 +99,17 @@ export default function DashboardSettings() {
             atualizarImagem={atualizarImagem}
           />
 
-          <hr className="divisor-secao"/>
+          <hr className="divisor-secao" />
 
-          <ProfileDataForm 
-            user={user} 
+          <ProfileDataForm
+            user={user}
             //user={userToRender} //teste sem usuario
             handleUpdate={handleUpdate}
           />
 
-          <hr className="divisor-secao"/>
+          <hr className="divisor-secao" />
 
-          <DeleteAccountButton
-            deletarConta={deletarConta}
-          />
-          
+          <DeleteAccountButton deletarConta={deletarConta} />
         </>
       ) : (
         <p className="carregando">Carregando usuário...</p>

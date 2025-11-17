@@ -1,8 +1,15 @@
 // src/context/UserContext.jsx
 import { createContext, useState, useEffect } from "react";
-import { loginUsuario, cadastrarUsuario, getUser, deleteUser, updateUser } from "../services/api";
+import {
+  loginUsuario,
+  cadastrarUsuario,
+  getUser,
+  deleteUser,
+  updateUser,
+} from "../services/api";
 import api from "../services/api";
 import { jwtDecode } from "jwt-decode";
+import { toast } from "react-toastify";
 
 // eslint-disable-next-line react-refresh/only-export-components
 export const UserContext = createContext();
@@ -66,6 +73,7 @@ export const UserProvider = ({ children }) => {
       //console.log(" Chamando backend em:", `/ver/usuario/${id}`);
       //console.log(" Cabeçalhos atuais do Axios:", api.defaults.headers.common);
       const response = await getUser(id);
+      console.log(response.data.users.foto);
       //console.log(" Resposta do backend:", response);
       setUser(response.data.users); //response retorna algo como:
       /*{
@@ -108,36 +116,29 @@ export const UserProvider = ({ children }) => {
 
   // Deleta o usuário e limpa os dados locais
   const handleDelete = async () => {
-    try {
-      await deleteUser(user.id);
-      setUser(null);
-      setToken(null);
-      localStorage.removeItem("token");
-      delete api.defaults.headers.common["Authorization"];
-    } catch (error) {
-      console.error("Erro ao excluir conta:", error);
-    }
+    await deleteUser(user.id);
+    setUser(null);
+    setToken(null);
+    localStorage.removeItem("token");
+    delete api.defaults.headers.common["Authorization"];
   };
 
   //logar usuario
   const loginUser = async () => {
-    try {
-      const response = await loginUsuario(email, senha);
+    const response = await loginUsuario(email, senha);
 
-      setToken(response.data.token);
-      console.log("Cheguei no final do loginUser");
-      return response;
-    } catch (err) {
-      alert("Email ou senha incorretos!");
-      console.log("Erro ao logal", err);
-    }
+    setToken(response.data.token);
+    console.log("Cheguei no final do loginUser");
+
+    return response;
   };
 
   const CriarUsuario = async () => {
     try {
-      const response = await cadastrarUsuario(nome, email, password);
+      await cadastrarUsuario(nome, email, password);
 
-      console.log("usuario cadastrado com sucesso! Usar o Toastfy!!", response);
+      toast.success("usuario cadastrado com sucesso!");
+      //console.log("usuario cadastrado com sucesso! Usar o Toastfy!!", response);
     } catch (err) {
       console.log("Erro ao cadastrar", err);
     }
@@ -167,7 +168,7 @@ export const UserProvider = ({ children }) => {
         getUser,
         loadUser,
         handleUpdate,
-        handleDelete
+        handleDelete,
       }}
     >
       {children}

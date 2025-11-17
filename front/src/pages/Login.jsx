@@ -7,6 +7,7 @@ import Button from "../components/button";
 import Checkbox from "../components/checkBox";
 import "../style/login.css";
 import { NavLink } from "react-router-dom";
+import { toast } from "react-toastify";
 //import { AuthContext } from "../context/AuthContext";
 
 export default function Login() {
@@ -24,7 +25,8 @@ export default function Login() {
     e.preventDefault();
 
     if (!email || !senha) {
-      alert("Preencha todos os campos!");
+      //alert("Preencha todos os campos!");
+      toast.warn("Preencha todos os campos!");
       return;
     }
 
@@ -32,6 +34,7 @@ export default function Login() {
       const resposta = await loginUser();
 
       console.log("Usuário logado com sucesso!", resposta);
+      toast.success("Login realizado com sucesso!");
 
       if (lembrar) localStorage.setItem("email", email);
       else localStorage.removeItem("email");
@@ -39,7 +42,8 @@ export default function Login() {
       navigate("/dashboard/settings");
     } catch (err) {
       console.error("Erro ao logar:", err);
-      alert("Falha ao logar!");
+      toast.error("Erro ao logar!");
+      //alert("Falha ao logar!");
     }
   };
 
