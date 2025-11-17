@@ -52,7 +52,7 @@ function DashboardLayout() {
           </div>
           <div className="menu-navegacao">
 
-            <NavLink to="dashboard" className="botao">
+            <NavLink to="/dashboard" className="botao">
               <MdDashboard size={24} className="menu-icone" />
               <span className="menu-link-texto">Dashboard</span>
             </NavLink>

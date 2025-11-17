@@ -1,7 +1,6 @@
 import React from 'react';
-
+import { NavLink } from 'react-router-dom';
 import '../style/Index.css'; 
-
 import { MdOutlineAttachMoney, MdDashboard, MdOutlineSettings } from "react-icons/md";
 
 import LogoImage from '../assets/logo.png';
@@ -26,33 +25,31 @@ function Index() {
             <div className="min-h-screen text-gray-800">
                 <header className="header-fixa">
                     <nav className="navbar">
-                        <a href="/" className="logo-link">
+                        <NavLink to="/" className="logo-link">
                             <span className="logo-icon">
                                 <img 
                                     src={LogoImage} 
                                     alt="Logo MyBudget"
                                 />
                             </span>
-                        </a>
+                        </NavLink>
                         <h1>MyBudget</h1>
-                        <a href="/login" className="button-cta2"> 
+                        <NavLink to="/register" className="button-cta2"> 
                             Cadastre-se
-                        </a> 
+                        </NavLink> 
                     </nav>
                 </header>
-            
                 <main className="container">
                     <section className="apresentacao">
-
                         <div className="container"> 
                             <h1 className="main-title">Bem-vindo ao MyBudget!</h1>
                             <p className="main-description">
                                 Gerencie suas finanças pessoais de forma fácil e eficiente.
                             </p>
                             
-                            <a href="/login" className="button-cta"> 
+                            <NavLink to="/login" className="button-cta"> 
                                 Comece Agora
-                            </a> 
+                            </NavLink> 
                         </div>
                         
                     </section>

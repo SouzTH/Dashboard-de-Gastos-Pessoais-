@@ -1,7 +1,6 @@
 import { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { NavLink } from "react-router-dom";
-
 //import axios from "axios";
 import { UserContext } from "../context/UserContext";
 import InputField from "../components/inputField";
@@ -12,7 +11,6 @@ import LogoImage from '../assets/logo.png';
 import HomeLinkLogo from '../components/HomeLogoLink';
 import "../style/login.css";
 
-import { NavLink } from "react-router-dom";
 import { toast } from "react-toastify";
 
 //import { AuthContext } from "../context/AuthContext";
