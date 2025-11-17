@@ -1,21 +1,22 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
-
-// 🎯 Certifique-se de que o caminho está correto para o seu AuthContext
 import { AuthProvider } from "./context/AuthContext";
 import { UserProvider } from "./context/UserContext";
+import { TransactionProvider } from "./context/TransactionContext";
+
 import App from "./App";
+import "react-toastify/dist/ReactToastify.css";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    {/* 1. Envolve o App no Provedor de Autenticação */}
     <AuthProvider>
-      {/* 2. Envolve nos outros provedores (UserProvider) */}
       <UserProvider>
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
+        <TransactionProvider>
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
+        </TransactionProvider>
       </UserProvider>
     </AuthProvider>
   </React.StrictMode>

@@ -3,6 +3,9 @@ import { NavLink, Link } from "react-router";
 import { useContext } from "react";
 import { UserContext } from "../context/UserContext";
 import { useNavigate } from "react-router";
+import { toast } from "react-toastify";
+
+import "../style/Registro.css";
 
 function RegisterForm() {
   const {
@@ -36,13 +39,16 @@ function RegisterForm() {
       password.trim() == "" ||
       password2.trim() == ""
     ) {
-      alert("Há campos vazios!", e);
+      //alert("Há campos vazios!", e);
+      toast.warn("Há campos vazios!");
       return false;
     } else if (!validaEmail()) {
-      alert("O Email inserido é invalido!", e);
+      //alert("O Email inserido é invalido!", e);
+      toast.warn("O Email inserido é invalido!");
       return false;
     } else if (!validaSenha()) {
-      alert("As senhas são diferentes!", e);
+      //alert("As senhas são diferentes!", e);
+      toast.warn("As senhas são diferentes!");
       return false;
     }
     console.log("passou na validação da senha");
@@ -53,23 +59,24 @@ function RegisterForm() {
       console.log("Erro ao cadastrar", err);
     }
 
-    alert("Você foi cadastrado!");
+    //alert("Você foi cadastrado!");
     navigate("/login");
   };
 
   return (
     <>
-      <div className="relative w-24 aspect-square rounded-full bg-white text-center">
-        <button className="w-8 font-bold aspect-square rounded-full border-2 border-green-700 text-green-700 absolute right-0 bottom-0 cursor-pointer">
+    <div className="formulario-container">
+      <div className="imagem-perfil-bloco">
+        <button className="botao-upload-img">
           +
         </button>
       </div>
 
-      <div className="w-9/12 space-y-2">
-        <div className="flex flex-col">
-          <p className="text-sm">Nome</p>
+      <div className="inputs-bloco">
+        <div className="grupo-input">
+          <p className="input-label">Nome</p>
           <input
-            className="bg-white rounded p-2"
+            className="campo-input"
             type="text"
             value={nome}
             placeholder="Seu Nome"
@@ -77,21 +84,21 @@ function RegisterForm() {
           />
         </div>
 
-        <div className="flex flex-col">
-          <p className="text-sm">Email</p>
+        <div className="grupo-input">
+          <p className="input-label">Email</p>
           <input
-            className="bg-white rounded p-2"
+            className="campo-input"
             type="email"
             value={email}
-            placeholder="seu@email.com"
+            placeholder="Seu@email.com"
             onChange={(e) => setEmail(e.target.value)}
           />
         </div>
 
-        <div className="flex flex-col">
-          <p className="text-sm">Senha</p>
+        <div className="grupo-input">
+          <p className="input-label">Senha</p>
           <input
-            className="bg-white rounded p-2"
+            className="campo-input"
             type="password"
             value={password}
             placeholder="Sua senha"
@@ -99,29 +106,33 @@ function RegisterForm() {
           />
         </div>
 
-        <div className="flex flex-col">
-          <p className="text-sm">Confirme a senha</p>
+        <div className="grupo-input">
+          <p className="input-label">Confirme a senha</p>
           <input
-            className="bg-white rounded p-2"
+            className="campo-input"
             type="password"
             value={password2}
             placeholder="Sua senha novamente"
             onChange={(e) => setPassword2(e.target.value)}
           />
         </div>
+
       </div>
+
       <button
-        className="rounded bg-violet-900 p-2 text-white w-9/12 cursor-pointer"
+        className="botao-cadastro"
         onClick={() => checkRegister()}
       >
         Cadastre-se
       </button>
-      <div className="flex space-x-2">
+
+      <div className="grupo-link-login">
         <p>Já tem uma conta?</p>
-        <NavLink to="/login" className="text-violet-600">
+        <NavLink to="/login" className="link-login">
           Faça login!
         </NavLink>
       </div>
+    </div>
     </>
   );
 }
