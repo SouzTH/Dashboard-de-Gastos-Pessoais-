@@ -9,4 +9,6 @@ router.post("/create/transaction/:id", auth, transactionController.createTransac
 router.patch("/update/transaction/:idTransacao/:id", auth, transactionController.updateTransaction);
 router.delete("/delete/transaction/:idTransacao/:id", auth, transactionController.deleteTransaction);
 
+router.get("/read/dashboard-data/:id", auth, transactionController.getDashboardData);
+
 module.exports = router;
