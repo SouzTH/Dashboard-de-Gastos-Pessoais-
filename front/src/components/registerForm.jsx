@@ -3,6 +3,7 @@ import { NavLink, Link } from "react-router";
 import { useContext } from "react";
 import { UserContext } from "../context/UserContext";
 import { useNavigate } from "react-router";
+import { toast } from "react-toastify";
 
 import "../style/Registro.css";
 
@@ -38,13 +39,16 @@ function RegisterForm() {
       password.trim() == "" ||
       password2.trim() == ""
     ) {
-      alert("Há campos vazios!", e);
+      //alert("Há campos vazios!", e);
+      toast.warn("Há campos vazios!");
       return false;
     } else if (!validaEmail()) {
-      alert("O Email inserido é invalido!", e);
+      //alert("O Email inserido é invalido!", e);
+      toast.warn("O Email inserido é invalido!");
       return false;
     } else if (!validaSenha()) {
-      alert("As senhas são diferentes!", e);
+      //alert("As senhas são diferentes!", e);
+      toast.warn("As senhas são diferentes!");
       return false;
     }
     console.log("passou na validação da senha");
@@ -55,7 +59,7 @@ function RegisterForm() {
       console.log("Erro ao cadastrar", err);
     }
 
-    alert("Você foi cadastrado!");
+    //alert("Você foi cadastrado!");
     navigate("/login");
   };
 
