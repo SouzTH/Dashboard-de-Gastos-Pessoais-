@@ -130,7 +130,7 @@ function DashboardHome() {
   }, [userId]);
 
   
-  const highchartsColors = ["#6A5ACD", "#90EE90", "#48BB78", "#64C963"]; 
+  const highchartsColors = ["#E26653", "#7BF660", "#470F5C", "#7818DB"]; 
 
   const pizzaOptions = {
     colors: highchartsColors,
@@ -156,10 +156,10 @@ function DashboardHome() {
     series: [
       { name: "Entradas", 
         data: dashboardData.barras.entradas, 
-        color: "#6B46C1" },
+        color: "#7818DB" },
       { name: "Saídas",
          data: dashboardData.barras.saidas, 
-         color: "#48BB78" },
+         color: "#E26653" },
     ],
   };
   const lineOptions = {
@@ -167,8 +167,12 @@ function DashboardHome() {
     title: { text: "" },
     xAxis: { categories: dashboardData.barras.categories },
     series: [
-      { name: "Entradas", data: dashboardData.barras.entradas, color: "#6B46C1" },
-      { name: "Saídas", data: dashboardData.barras.saidas, color: "#48BB78" },
+      { name: "Entradas", 
+        data: dashboardData.barras.entradas, 
+        color: "#60A03B" },
+      { name: "Saídas", 
+        data: dashboardData.barras.saidas, 
+        color: "#E26653" },
     ],
   };
 
