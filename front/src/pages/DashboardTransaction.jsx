@@ -1,8 +1,10 @@
 import { useContext, useState } from "react";
 import { TransactionContext } from "../context/TransactionContext";
 import { UserContext } from "../context/UserContext";
-
+import { ToastContainer, toast } from 'react-toastify';
+  
 function DashboardTransaction() {
+  
   const {
     transactions,
     isLoading,
@@ -25,7 +27,6 @@ function DashboardTransaction() {
 
 
   const [newTransaction, setNewTransaction] = useState(template);
-  const [formMessage, setFormMessage] = useState("");
 
   // Manipula a mudança de estado do formulário
   const handleChange = (e) => {
@@ -38,14 +39,12 @@ function DashboardTransaction() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setFormMessage("");
-
     if (
       !newTransaction.valor ||
       !newTransaction.conta ||
       !newTransaction.categoria
     ) {
-      setFormMessage(
+      toast.warn(
         "Preencha os campos obrigatórios: Valor, Categoria e Conta."
       );
       return;
@@ -58,19 +57,19 @@ function DashboardTransaction() {
 
       try {
         await updateTransaction(editId, transactionData);
-        setFormMessage("Transação atualizada com sucesso!");
+        toast.success("Transação atualizada com sucesso!");
         setEditId(null);
         setNewTransaction(template);
       } catch (err) {
-        setFormMessage(`Erro ao atualizar: ${err.message}`);
+        toast.error(`Erro ao atualizar: ${err.message}`);
       }
     } else {
       try {
         await addTransaction(transactionData);
-        setFormMessage("Transação adicionada com sucesso!");
+        toast.success("Transação adicionada com sucesso!");
         setNewTransaction(template);
       } catch (err) {
-        setFormMessage(`Erro ao adicionar: ${err.message}`);
+        toast.error(`Erro ao adicionar: ${err.message}`);
       }
     };
   };
@@ -78,8 +77,9 @@ function DashboardTransaction() {
     if (window.confirm("Tem certeza que deseja deletar esta transação?")) {
       try {
         await deleteTransaction(transactionId);
+        toast.success("Transação deletada com sucesso!");
       } catch (err) {
-        console.error("Falha ao deletar:", err.message);
+        toast.error(`Erro ao deletar: ${err.message}`);
       }
     }
   };
@@ -107,6 +107,7 @@ function DashboardTransaction() {
 
   return (
     <>
+      <ToastContainer />
       <div className="w-3/4 p-6 h-screen">
         <div className="flex flex-row min-w-full h-full justify-between space-x-8">
           {/* Metade Esquerda: Formulário */}
@@ -114,17 +115,6 @@ function DashboardTransaction() {
               <h2 className="text-xl font-semibold self-baseline-center">
                 {editId ? "Editar Transação" : "Adicionar Nova Transação"}
               </h2>
-
-              {/*  formMessage/Toastify */}
-              {formMessage && formMessage.startsWith("Erro") ? (
-                <div className="bg-red-100 text-red-700 p-2 rounded mb-4">
-                  {formMessage}
-                </div>
-              ) : formMessage ? (
-                <div className="bg-emerald-100 text-emerald-700 p-2 rounded mb-4">
-                  {formMessage}
-                </div>
-              ) : null}
 
               <form onSubmit={handleSubmit} className="space-y-2">
                 <div>
