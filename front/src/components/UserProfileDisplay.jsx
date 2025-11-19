@@ -12,17 +12,17 @@ export default function UserProfileDisplay({
     const defaultImageUrl = "https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y"; 
     
     return (
-        <div className="perfil-info-container">
+        <div className="cp-perfil-info-container">
             {/* Foto do usuario */}
-            <div className="perfil-foto-container">
+            <div className="cp-perfil-foto-container">
                 <img
                     src={imageURL || defaultImageUrl}
                     alt={`Foto de perfil de ${user.nome}`}
-                    className="perfil-foto"
+                    className="cp-perfil-foto"
                 />
                 <button
                     onClick = {handleClickUpload}
-                    className="perfil-foto-botao"
+                    className="cp-perfil-foto-botao"
                     title="Clique para alterar a imagem"
                 >
                     Alterar Foto
@@ -30,9 +30,9 @@ export default function UserProfileDisplay({
             </div>
 
             {/* Informações do usuario */}
-            <div className="perfil-detalhes">
-                <h2 className="info-nome">{user.nome}</h2>
-                <p className="info-email">{user.email}</p>
+            <div className="cp-perfil-detalhes">
+                <h2 className="cp-info-nome">{user.nome}</h2>
+                <p className="cp-info-email">{user.email}</p>
             </div>
             
             {/* Input de arquivo (hidden) */}
@@ -41,7 +41,7 @@ export default function UserProfileDisplay({
                 accept="image/*"
                 ref={fileInputRef}  
                 onChange={atualizarImagem}
-                className="input-escondido"
+                className="cp-input-escondido"
             />
         </div>
     );

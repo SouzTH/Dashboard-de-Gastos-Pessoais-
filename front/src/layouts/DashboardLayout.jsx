@@ -27,46 +27,45 @@ function DashboardLayout() {
         <div className="sidebar">
 
           <div className="sidebar-logo">
-            <Link to="/" className="logo-link">
+            <Link to="/" className="sb-logo-link">
               <img 
                 src={LogoImage} 
                 alt="Logo MyBudget"
-                className="logo-icon"
+                className="sb-logo-icon"
               />
-              <span className="menu-link-texto">MyBudget</span>
+              <span className="sb-menu-link-texto">MyBudget</span>
             </Link>
           </div>
           
-          <div className="menu-conta">
+          <div className="sb-menu-conta">
             <img
-              className="perfil-imagem"
+              className="sb-perfil-imagem"
               src={profileImgUrl || ImagemPadrao}/>
 
-            <NavLink to="settings" className="botao">
-              <MdSettings size={24} className="menu-icone" />
-              <span className="menu-link-texto">Minha Conta</span>
+            <NavLink to="settings" className="sb-botao">
+              <MdSettings size={24} className="sb-menu-icone" />
+              <span className="sb-menu-link-texto">Minha Conta</span>
             </NavLink>
           </div>
-          <div className="space">
+          <div className="sb-space">
             
           </div>
-          <div className="menu-navegacao">
-
-            <NavLink to="/dashboard" className="botao">
-              <MdDashboard size={24} className="menu-icone" />
-              <span className="menu-link-texto">Dashboard</span>
+          <div className="sb-menu-navegacao">
+            <NavLink to="/dashboard" className="sb-botao">
+              <MdDashboard size={24} className="sb-menu-icone" />
+              <span className="sb-menu-link-texto">Dashboard</span>
             </NavLink>
-
+            
+            {/*desabilitado temporariamente
             <NavLink to="team" className="botao">
               <MdPeople size={24} className="menu-icone" />
               <span className="menu-link-texto">Equipe</span>
-            </NavLink>
+            </NavLink> */}
 
-            <NavLink to="transaction" className="botao">
-              <MdCompareArrows size={24} className="menu-icone" />
-              <span className="menu-link-texto">Transações</span>
+            <NavLink to="transaction" className="sb-botao">
+              <MdCompareArrows size={24} className="sb-menu-icone" />
+              <span className="sb-menu-link-texto">Transações</span>
             </NavLink>
-            
           </div>
         </div>
         <Outlet />

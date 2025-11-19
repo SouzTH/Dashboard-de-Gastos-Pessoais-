@@ -1,0 +1,163 @@
+.transacao-container {
+    width: 75%;
+    padding: 1.5rem;
+    box-sizing: border-box; 
+    margin: 0 auto;
+    margin-top: 40px;
+}
+
+.transacao-layout {
+    display: flex;
+    gap: 2rem; /* gap-8 */
+    height: 100%;
+    align-items: flex-start;
+}
+
+/*Card de Formulário (Esquerda)*/
+.transacao-form-card {
+    width: 50%;
+    padding: 1.5rem;
+    box-sizing: border-box;
+    border: 2px solid, black; 
+    border-radius: 1rem;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+    background-color: white;
+    overflow: auto;
+    height: 55%;
+}
+
+.transacao-form-content{
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.transacao-form-titulo {
+    font-size: 1.5rem; /* text-2xl */
+    font-weight: 700;
+    margin-bottom: 1.5rem; /* mb-6 */
+    text-align: left;
+    color: black;
+}
+
+/* Elementos do Formulário*/
+.transacao-form-campo {
+    margin-bottom: 1rem; /* space-y-4 */
+}
+
+.transacao-form-label {
+    display: block;
+    font-size: 0.875rem; /* text-sm */
+    font-weight: 600;
+    color: black;
+    margin-bottom: 0.25rem; /* mb-1 */
+}
+
+.transacao-form-input, .transacao-form-select {
+    width: 100%;
+    padding: 0.75rem; /* p-3 */
+    border: 1px solid black;
+    border-radius: 0.5rem;
+    background-color: white;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.06);
+    transition: black 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.transacao-form-input:focus, .transacao-form-select:focus {
+    border-color: #7818DB ;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2);
+}
+
+.transacao-form-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+}
+
+.transacao-form-content button {
+    margin-top: 1rem;
+    flex-shrink: 0;
+}
+
+/*Card de Lista (Direita)*/
+.transacao-lista-card {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    height: 55%;
+    padding: 1rem; 
+    box-sizing: border-box;
+    background-color: white;
+    border-radius: 1rem;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+    border: 2px solid black;
+}
+
+.transacao-lista-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0;
+    flex-shrink: 0;
+}
+
+.transacao-lista-titulo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 0;
+    color: black;
+    text-align: left;
+}
+
+/* lista de itens*/
+.transacao-lista-transacoes {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    overflow-y: auto;
+    padding-right: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+/* estilo do item*/
+.transacao-item-transacao {
+    padding: 1rem;
+    border-radius: 0.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #ffffff;
+    transition: background-color 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.06);
+    border: 1px solid black;
+}
+
+.transacao-item-transacao:hover {
+    background-color: #ebffef; /*era cinza, mudei pra um verde clarinho*/
+}
+
+/*detalhes da transação*/
+.transacao-item-detalhes {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    min-width: 0;
+    padding-right: 1rem;
+}
+
+.transacao-item-descricao {
+    font-weight: 700;
+    color: #111827;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.transacao-item-detalhes p.inline {
+    font-weight: 700;
+}

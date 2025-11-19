@@ -3,6 +3,8 @@ import { getTodasTransacoes } from "../services/api";
 import { UserContext } from "../context/UserContext";
 import ChartCard from "../components/ChartCard";
 
+import "../style/Dashboard.css";
+
 const MESES = ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"];
 
 const processarDadosMensais = (transacoesBrutas) => {
@@ -177,11 +179,11 @@ function DashboardHome() {
   }
 
   return (
-    <div className="w-full h-screen p-6 font-sans flex justify-center">
-      <div className="w-[95%] grid grid-cols-12 grid-rows-4 gap-6 overflow-auto pb-10">
+    <div className="dashboard-home-container">
+      <div className="dashboard-grid">
 
-        <div className="col-span-4 row-span-2 bg-[#E6E6E6] rounded-2xl p-4 flex flex-col text-gray-700 shadow-sm">
-          <div className="flex-1 bg-white/60 rounded-xl p-2 h-full border border-white/50">
+        <div className="dashboard-cardPie">
+          <div className="dashboard-cardPie-interno">
             <ChartCard 
               title="Saídas por Categoria" 
               defaultType="pie"
@@ -191,8 +193,8 @@ function DashboardHome() {
           </div>
         </div>
 
-        <div className="col-span-5 row-span-2 bg-[#E6E6E6] rounded-2xl p-4 flex flex-col text-gray-700 shadow-sm">
-          <div className="flex-1 bg-white/60 rounded-xl p-2 h-full border border-white/50"> 
+        <div className="dashboard-cardMensal">
+          <div className="dashboard-cardMensal-interno"> 
             <ChartCard 
               title="Balanço Mensal" 
               defaultType="bar"
@@ -201,16 +203,15 @@ function DashboardHome() {
             />
           </div>
         </div>
-        <div className="col-span-3 row-span-2 bg-linear-to-br from-purple-600 to-purple-800 rounded-2xl p-6 flex flex-col items-center justify-center text-white shadow-md">
+        <div className="col-span-3 row-span-2 bg-linear-to-br from-purple-600/40 to-purple-800/100 rounded-2xl p-6 flex flex-col items-center justify-center text-white shadow-md">
           <div className="w-16 h-16 bg-white/20 rounded-full mb-3 flex items-center justify-center text-4xl backdrop-blur-sm">
             💳
           </div>
           <h3 className="font-semibold text-base text-center">Métodos de Pagamento</h3>
           <p className="text-xs text-purple-200 mt-2 text-center">Cartão de Crédito Principal</p>
         </div>
-
-        <div className="col-span-7 row-span-2 bg-[#E6E6E6] rounded-2xl p-4 flex flex-col text-gray-700 shadow-sm">
-          <div className="flex-1 bg-white/60 rounded-xl p-2 h-full border border-white/50">
+        <div className="dashboard-cardLinha">
+          <div className="dashboard-cardLinha-interno">
             <ChartCard 
               title="Evolução (Linha)" 
               defaultType="line"
@@ -219,19 +220,18 @@ function DashboardHome() {
             />
           </div>
         </div>
-
-        <div className="col-span-5 row-span-2 bg-white rounded-2xl p-6 flex flex-col text-gray-700 shadow-sm border border-gray-200">
-          <h2 className="text-lg font-bold text-gray-800 mb-1">Histórico</h2>
-          <p className="text-xs text-gray-500 mb-4">Últimas 5 movimentações</p>
+        <div className="dashboard-cardHistorico">
+          <h2 className="dashboard-cardHistorico-title">Histórico</h2>
+          <p className="dashboard-cardHistorico-subtitle">Últimas 5 movimentações</p>
           
-          <div className="flex-1 space-y-3 overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-gray-300">
+          <div className="dashboard-cardHistorico-list">
             {dashboardData.historico.length === 0 ? (
               <div className="flex flex-col items-center justify-center h-full text-gray-400 text-sm">
                 <p>Nenhuma transação encontrada.</p>
               </div>
             ) : (
               dashboardData.historico.map((transacao, index) => (
-                <div key={index} className="flex justify-between items-center p-2 hover:bg-gray-50 rounded-lg transition-colors border-b border-gray-100 last:border-0">
+                <div key={index} className="dashboard-cardHistorico-item">
                   <div className="flex flex-col">
                     <span className="font-medium text-gray-800 text-sm">{transacao.categoria || "Geral"}</span> 
                     <span className="text-xs text-gray-400">{transacao.descricao || "Sem descrição"}</span>

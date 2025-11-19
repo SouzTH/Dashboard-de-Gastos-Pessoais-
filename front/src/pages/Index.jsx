@@ -12,19 +12,19 @@ import LogoImage from "../assets/logo.png";
 function Index() {
   const featureData = [
     {
-      icon: <MdOutlineAttachMoney size={30} className="icone" />,
+      icon: <MdOutlineAttachMoney size={30} className="index-icone" />,
       title: "Movimentações Financeiras",
       description:
         "Controle detalhado das movimentações e facilidade na análise do comportamento financeiro.",
     },
     {
-      icon: <MdDashboard size={30} className="icone" />,
+      icon: <MdDashboard size={30} className="index-icone" />,
       title: "Dashboard",
       description:
         "Auxilia diretamente na tomada de decisões ao identificar rapidamente desvios orçamentários, tendências de consumo e a saúde financeira geral.",
     },
     {
-      icon: <MdOutlineSettings size={30} className="icone" />,
+      icon: <MdOutlineSettings size={30} className="index-icone" />,
       title: "Configurações e Personalização",
       description:
         "Experiência prática e acessível, adaptando a ferramenta às particularidades da sua vida financeira e oferecendo mecanismos para o controle proativo.",
@@ -62,41 +62,41 @@ function Index() {
   return (
     <>
       <div className="min-h-screen text-gray-800">
-        <header className="header-fixa">
-          <nav className="navbar">
-            <NavLink to="/" className="logo-link">
-              <span className="logo-icon">
+        <header className="index-header-fixa">
+          <nav className="index-navbar">
+            <NavLink to="/" className="index-logo-link">
+              <span className="index-logo-icon">
                 <img src={LogoImage} alt="Logo MyBudget" />
               </span>
             </NavLink>
             <h1>MyBudget</h1>
-            <NavLink to="/register" className="button-cta2">
+            <NavLink to="/register" className="index-button-cta2">
               Cadastre-se
             </NavLink>
           </nav>
         </header>
-        <main className="container">
-          <section className="apresentacao">
-            <div className="container">
-              <h1 className="main-title">Bem-vindo ao MyBudget!</h1>
-              <p className="main-description">
+        <main className="index-container">
+          <section className="index-apresentacao">
+            <div className="index-container">
+              <h1 className="index-main-title">Bem-vindo ao MyBudget!</h1>
+              <p className="index-main-description">
                 Gerencie suas finanças pessoais de forma fácil e eficiente.
               </p>
 
-              <NavLink to="/login" className="button-cta">
+              <NavLink to="/login" className="index-button-cta">
                 Comece Agora
               </NavLink>
             </div>
           </section>
 
-          <section className="features">
-            <div className="container">
+          <section className="index-features">
+            <div className="index-container">
               <h2>Transforme Sua Vida Financeira</h2>
 
-              <div className="features-grid">
+              <div className="index-features-grid">
                 {featureData.map((feature, index) => (
-                  <div key={index} className="feature-item">
-                    <div className="feature-icon">{feature.icon}</div>
+                  <div key={index} className="index-feature-item">
+                    <div className="index-feature-icon">{feature.icon}</div>
                     <h3>{feature.title}</h3>
                     <p>{feature.description}</p>
                   </div>
@@ -105,21 +105,21 @@ function Index() {
             </div>
           </section>
 
-          <section className="about-us">
-            <div className="container">
+          <section className="index-about-us">
+            <div className="index-container">
               <h2>Nossa Equipe</h2>
               <p>Conheça os desenvolvedores por trás do MyBudget!</p>
 
-              <div className="team-grid">
+              <div className="index-team-grid">
                 {teamData.map((member, index) => (
                   <div
                     key={index}
-                    className="flex flex-col items-center member-card"
+                    className="flex flex-col items-center index-member-card"
                   >
                     <img
                       src={member.imgUrl}
                       alt={`Membro ${index + 1}: ${member.name}`}
-                      className="member-foto"
+                      className="index-member-foto"
                       onError={(e) => {
                         e.target.onerror = null;
                         e.target.src =
