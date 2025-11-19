@@ -6,7 +6,7 @@ import DataFilter from './DataFilter';
 
 const COLORS = {
   primary: "#7818DB",
-  secondary: "#E26653",
+  secondary: "#9E5EE0",
   tertiary: "#7BF660",
   quaternary: "#470F5C", 
   neutral: "#DDD"
@@ -19,7 +19,7 @@ const PIE_COLORS = [
     COLORS.quaternary,  // Abr
     "#F59E0B",          // Mai (Amarelo)
     "#3B82F6",          // Jun (Azul)
-    "#8B5CF6",          // Jul (Roxo Claro)
+    "#66D9B6",          // Jul (Turquesa)
     "#EC4899",          // Ago (Rosa)
     "#10B981",          // Set (Esmeralda)
     "#6366F1",          // Out (Indigo)
