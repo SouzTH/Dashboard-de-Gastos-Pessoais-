@@ -10,8 +10,8 @@
 
 .layout-container {
     display: flex;
-    min-height: 100vh;
     width: 100%;
+    height: 100vh;
     font-family: 'Inter', sans-serif;
     transition: grid-template-columns 0.3s ease-in-out; 
     /*transicao para suavizar a mudanca*/
@@ -24,8 +24,6 @@
 }
 
 .sidebar {
-    top: 0;
-    height: 100vh;
     width: var(--sidebar-padrao);
     background-color: var(--sidebar-bg-color); 
     color: var(--text-color);

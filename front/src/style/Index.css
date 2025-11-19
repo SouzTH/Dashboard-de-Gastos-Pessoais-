@@ -1,18 +1,9 @@
 :root {
-    --text-dark: #333;
-    --bg-light: #f0f4f8;
     --nav-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-
-    --fundo-primario: #EDE9FE;
-    --borda-primaria: #856C97;
 
     --fundo-gradiente-inicio: #E1CCF7;
     --fundo-gradiente-meio: #d8ece6;
     --fundo-gradiente-fim: #F5E8FB;
-
-    --texto-titulo: #312E81;
-    --primary-color: var(--texto-titulo);
-    --card-bg: #ffffff;
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap');
@@ -230,7 +221,7 @@ margin-bottom: 3rem;
     width: 200px;
     padding: 1rem;
     text-align: center;
-    background-color: var(--card-bg);
+    background-color: white;
     border-radius: 12px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     border: 1px solid black;

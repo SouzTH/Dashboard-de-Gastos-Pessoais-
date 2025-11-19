@@ -2,17 +2,14 @@
     height: fit-content;
     width: 450px;
     margin: 60px;
-
     background-color: white;
     border: 2px solid black;
     border-radius: 1rem;
-
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     padding: 2rem;
-
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
 }
 
