@@ -177,7 +177,7 @@ function DashboardHome() {
   }
 
   return (
-    <div className="w-full h-screen p-6 bg-gray-100 font-sans flex justify-center">
+    <div className="w-full h-screen p-6 font-sans flex justify-center">
       <div className="w-[95%] grid grid-cols-12 grid-rows-4 gap-6 overflow-auto pb-10">
 
         <div className="col-span-4 row-span-2 bg-[#E6E6E6] rounded-2xl p-4 flex flex-col text-gray-700 shadow-sm">
