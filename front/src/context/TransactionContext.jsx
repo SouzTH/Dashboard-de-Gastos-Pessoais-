@@ -28,8 +28,7 @@ export const TransactionProvider = ({ children }) => {
       const response = await api.get(`/read/all-transactions/${user.id}`);
       setTransactions(response.data.message); // message contém as transações, é um array de objetos
     } catch (err) {
-      toast.error(`Erro ao carregar transações: ${err.message}`);
-      setError("Falha ao carregar transações.");
+      setError(`Falha ao carregar transações. ${err.message}`);
       setTransactions([]);
     } finally { // independentemente de sucesso ou erro
       setIsLoading(false);
@@ -47,8 +46,7 @@ export const TransactionProvider = ({ children }) => {
       await api.post(`/create/transaction/${user.id}`, data);
       await loadTransactions();
     } catch (err) {
-      toast.error(`Erro ao adicionar transação: ${err.message}`);
-      setError("Erro ao adicionar transação.");
+      setError(`Erro ao adicionar transação. ${err.message}`);
       throw new Error(err); 
     }
   };
@@ -60,8 +58,7 @@ export const TransactionProvider = ({ children }) => {
       );
       await loadTransactions();
     } catch (err) {
-      toast.error(`Erro excluir a conta. Tente novamente: ${err.message}`);
-      setError("Erro ao deletar transação.");
+      setError(`Erro ao deletar transação. ${err.message}`);
       throw new Error(err); 
     }
   };
