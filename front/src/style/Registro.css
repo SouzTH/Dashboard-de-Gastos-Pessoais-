@@ -1,0 +1,147 @@
+:root {  
+    --fundo-gradiente-inicio: #E1CCF7;
+    --fundo-gradiente-meio: #d8ece6;
+    --fundo-gradiente-fim: #F5E8FB;
+
+    --texto-titulo: #312E81;
+}
+
+.rg-pagina-autenticacao {
+    display: flex;
+    flex-direction: column; 
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    width: 100vw;
+
+    background: linear-gradient(
+        135deg, 
+        var(--fundo-gradiente-inicio) 0%,
+        var(--fundo-gradiente-meio) 50%, 
+        var(--fundo-gradiente-fim) 100%); 
+}
+
+.card-registro {
+    width: 100%; 
+    min-height: 500px;
+    max-width: 400px; 
+    
+    background-color: white;
+    border: 2px solid black;
+    border-radius: 1rem;
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    padding: 1.5rem;
+
+    font-family: 'Inter', sans-serif;
+
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+
+    font-size: 0.875rem;
+
+}
+
+.rg-titulo-autenticacao {
+    font-size: 2rem;
+    text-align: center;
+    margin-top: 2rem;
+    margin-bottom: 1rem; 
+    color: black;
+    font-weight: 600;
+
+}
+
+.rg-formulario-container {
+    width: 95%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.rg-imagem-perfil-bloco {
+    position: relative;
+    width: 6rem;
+    aspect-ratio: 1 / 1;
+    border-radius: 50%;
+    background: linear-gradient(
+        135deg, 
+        var(--fundo-gradiente-inicio) 0%,
+        var(--fundo-gradiente-meio) 50%, 
+        var(--fundo-gradiente-fim) 100%); ;
+    text-align: center;
+}
+
+.rg-botao-upload-img {
+    width: 2rem;
+    aspect-ratio: 1 / 1; 
+    border-radius: 50%; 
+    border: 2px solid #065f46;
+    color: #065f46; 
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    cursor: pointer;
+}
+
+.rg-inputs-bloco {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+}
+
+.rg-grupo-input {
+    display: flex;
+    flex-direction: column;
+}
+
+.rg-input-label {
+    font-size: 0.875rem; 
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+}
+
+.rg-campo-input {
+    font-size: 0.875rem;
+    background-color: white;
+    border-radius: 9px;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    outline: none;
+}
+
+.rg-botao-cadastro {
+    width: 100%;
+    background-color: #4c1d95;
+    padding: 0.5rem; 
+    color: white;
+    border-radius: 8px; 
+    cursor: pointer;
+    font-weight: 500;
+    border: none;
+    height: 42px;
+    font-size: 1rem;  
+    margin-bottom: 0.5rem;
+}
+
+.rg-botao-cadastro:hover {
+    background-color: #38106b;
+}
+
+.rg-grupo-link-login {
+    display: flex;
+    gap: 0.5rem;
+    font-weight: 600; 
+}
+
+.rg-link-login {
+    color: #7818DB;
+    text-decoration: none;
+    font-weight: 600;
+}

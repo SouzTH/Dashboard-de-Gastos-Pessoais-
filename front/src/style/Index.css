@@ -1,0 +1,256 @@
+:root {
+    --nav-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+
+    --fundo-gradiente-inicio: #E1CCF7;
+    --fundo-gradiente-meio: #d8ece6;
+    --fundo-gradiente-fim: #F5E8FB;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap');
+
+
+body {
+    font-family: "Inter", sans-serif;
+    background: linear-gradient(
+        135deg, 
+        var(--fundo-gradiente-inicio) 0%,
+        var(--fundo-gradiente-meio) 50%, 
+        var(--fundo-gradiente-fim) 100%);
+}
+
+.index-header-fixa {
+    margin-top: 32px;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.index-navbar {
+    width: 90%;
+    max-width: 1200px;
+    padding: 10px 20px;
+
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: var(--nav-shadow);
+    border: solid 1px #000000;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.index-logo-link {
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    color: black;
+    transition: color 0.2s ease;
+}
+
+.index-logo-icon {
+    width: 45px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.index-logo-icon img {
+    width: 100%;
+    height: 100%;
+}
+
+.index-icone{
+    color:#5dbd48; 
+    flex-shrink: 0;
+}
+
+.index-navbar h1{
+    font-family: "Inter", sans-serif;
+    font-size: 24px;
+    font-weight: 800;
+}
+
+.index-button-cta {
+    display: inline-block;
+    text-decoration: none;
+    padding: 10px 20px;
+    background-color:#5dbd48;
+    color: white;
+    font-weight: 600;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.index-button-cta2 {
+    display: inline-block;
+    text-decoration: none;
+    padding: 10px 20px;
+    background-color:#7818DB;
+    color: white;
+    font-weight: 600;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.index-button-cta2:hover {
+    background-color: #360e61;
+    opacity: 1;
+    transform: scale(1.05);
+}
+
+.index-button-cta:hover {
+    background-color: rgb(63, 155, 42);
+    opacity: 1;
+    transform: scale(1.05);
+}
+
+.index-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
+.index-apresentacao{
+    width: 90%;
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 40px 20px;
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.index-apresentacao .index-main-title{
+    font-size: 3rem;
+    font-weight: 800;
+    color: black;
+    margin-bottom: 0.5rem;
+}
+
+.index-apresentacao .index-main-description{
+    color: #272727;
+    margin-top: 0rem;
+    margin-bottom: 2.5rem;
+    font-size: 1.25rem;
+}
+
+.index-features {
+    padding: 4rem 0;
+    text-align: center;
+}
+
+.index-features h2 {
+    font-size: 2.25rem;
+    color: black;
+    margin-bottom: 3rem;
+    font-weight: 800;
+}
+
+.index-features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /*deixa os cards em colunas*/
+    gap: 2rem;
+}
+
+.index-feature-item{
+    padding: 20px;
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.index-feature-item:hover {
+    transform: translateY(-1px); /*levanta um pouco*/
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.index-feature-icon {
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: center;
+}
+
+.index-feature-item h3 {
+    margin-top: 1rem;
+    font-size: 1.5rem;
+    color: black;
+    font-weight: 700;
+}
+
+.index-feature-item p {
+    color: #666;
+    margin-top: 0.5rem;
+}
+
+.index-about-us {
+    background-color: transparent;
+    padding: 4rem 0;
+    text-align: center;
+}
+
+.index-about-us h2 {
+    font-size: 2.25rem;
+    color: black;
+    margin-bottom: 0.5rem;
+    font-weight: 800;
+}
+
+.index-about-us p {
+margin-bottom: 3rem;
+}
+
+
+.index-team-grid {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+
+.index-member-card {
+    width: 200px;
+    padding: 1rem;
+    text-align: center;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border: 1px solid black;
+}
+
+.index-member-card .index-member-foto {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 0.75rem;
+    border: 2px solid #7818DB;
+}
+
+.index-member-card h4 {
+    font-size: 1.1rem;
+    color: black;
+}
+
+.index-member-card p {
+    font-size: 0.9rem;
+    color: #999;
+}
+
+footer {
+    margin-top: 40px;
+    padding: 20px 0;
+    border-top: 1px solid #547C85;
+    background-color: #7B879E;
+    font-size: 0.9rem;
+    color: #e4e4e4;
+}
