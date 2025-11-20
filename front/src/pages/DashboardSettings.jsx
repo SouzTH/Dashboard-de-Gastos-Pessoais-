@@ -1,5 +1,3 @@
-//import React, { useState, useEffect } from "react";  //teste sem usuario
-
 import { useContext, useRef } from "react";
 import { UserContext } from "../context/UserContext";
 import { backendURL } from "../services/api";
@@ -13,10 +11,6 @@ import DeleteAccountButton from "../components/DeleteAccountButton.jsx";
 import "../style/ConfiguracoesPerfil.css";
 import { Route } from "react-router";
 
-// const beeUser = {  //teste sem usuario
-//      nome: "Bee Teste",
-//      email: "bee@teste.com",
-// };
 
 export default function DashboardSettings() {
   const { user, handleUpdate, handleDelete } = useContext(UserContext);
@@ -24,8 +18,6 @@ export default function DashboardSettings() {
 
   const imageURL = user && user.foto ? `${backendURL}${user.foto}` : null;
   const fileInputRef = useRef(null);
-
-  // const userToRender = user || beeUser; //teste sem usuario
 
   // const atualizarNome = async () => {
   //   if (!user) return alert("Usuário ainda não carregado.");
@@ -78,37 +70,35 @@ export default function DashboardSettings() {
   };
 
   return (
-    <div className="perfil-container">
-      <h1 className="titulo-configuracoes">
+    <div className="cp-perfil-container">
+      <h1 className="cp-titulo-configuracoes">
         Configurações de Perfil
       </h1>
 
-      {user ? ( //true para teste sem usuario
+      {user ? (
         <>
           <UserProfileDisplay
             user={user}
-            //user={userToRender} //teste sem usuario
             imageURL={imageURL}
             fileInputRef={fileInputRef}
             handleClickUpload={handleClickUpload}
             atualizarImagem={atualizarImagem}
           />
 
-          <hr className="divisor-secao" />
+          <hr className="cp-divisor-secao" />
 
           <ProfileDataForm
             user={user}
-            //user={userToRender} //teste sem usuario
             handleUpdate={handleUpdate}
           />
 
-          <hr className="divisor-secao" />
+          <hr className="cp-divisor-secao" />
 
           <DeleteAccountButton deletarConta={deletarConta} />
         </>
       ) : (
         // linkar para pagina inicial ou de cadastro
-        <p className="carregando">Carregando usuário...</p>
+        <p>Carregando usuário...</p>
       )}
     </div>
   );

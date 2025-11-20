@@ -78,13 +78,13 @@ export default function ProfileDataForm({ user, handleUpdate }) {
   };
 
   return (
-    <div className="form-container-geral">
-      <h3 className="form-titulo">Editar Perfil</h3>
+    <div className="cp-form-container-geral">
+      <h3 className="cp-form-titulo">Editar Perfil</h3>
 
-      <form onSubmit={handleSubmit} className="perfil-form">
+      <form onSubmit={handleSubmit} className="cp-perfil-form">
         {/* campo nome */}
-        <div className="grupo-campo">
-          <label className="rotulo" htmlFor="nome">
+        <div className="cp-grupo-campo">
+          <label className="cp-rotulo" htmlFor="nome">
             Nome:
           </label>
           <input
@@ -93,14 +93,14 @@ export default function ProfileDataForm({ user, handleUpdate }) {
             name="nome"
             value={formData.nome}
             onChange={handleChange}
-            className="campo-input"
+            className="cp-campo-input"
             required
           />
         </div>
 
         {/* campo email */}
-        <div className="grupo-campo">
-          <label className="rotulo" htmlFor="email">
+        <div className="cp-grupo-campo">
+          <label className="cp-rotulo" htmlFor="email">
             Email:
           </label>
           <input
@@ -109,13 +109,13 @@ export default function ProfileDataForm({ user, handleUpdate }) {
             name="email"
             value={formData.email}
             onChange={handleChange}
-            className="campo-input"
+            className="cp-campo-input"
             required
           />
         </div>
         {/* campo senha */}
-        <div className="grupo-campo">
-          <label className="rotulo" htmlFor="senha">
+        <div className="cp-grupo-campo">
+          <label className="cp-rotulo" htmlFor="senha">
             Senha:
           </label>
           <input
@@ -124,13 +124,13 @@ export default function ProfileDataForm({ user, handleUpdate }) {
             name="senha"
             value={formData.senha}
             onChange={handleChange}
-            className="campo-input"
+            className="cp-campo-input"
             placeholder=""
           />
         </div>
         {/* botao salvar */}
         <div>
-          <button type="submit" className="botao-salvar">
+          <button type="submit" className="cp-botao-salvar">
             Salvar Alterações
           </button>
         </div>

@@ -1,8 +1,4 @@
 :root {  
-  --fundo-gradiente-inicio: #E1CCF7;
-  --fundo-gradiente-meio: #d8ece6;
-  --fundo-gradiente-fim: #F5E8FB; 
-
   --cor-fundo-card: white;
   --cor-borda-card: black;
 
@@ -69,7 +65,7 @@
   width: 100%; 
   height: auto;
   padding:  0.75rem 1rem; 
-  border-radius: 8px; 
+  border-radius: 9px; 
   border: 1px solid #d1d5db; 
   background: #ffffff; 
   color: #1f1f1f; 
@@ -94,7 +90,7 @@
 .login-page input[type="checkbox"] {
   width: 1rem;
   height: 1rem;
-  border-radius: 4px;
+  border-radius: 9px;
   border: 1px solid #d1d5db;
   margin-right: 0.5rem;
   accent-color: #6b46c1
@@ -136,18 +132,18 @@
   width: 100%;
 }
 
-.link-small {
+.login-link-small {
   text-decoration: none;
   color: var(--cor-link);
   font-weight: 600;
   font-size: 0.875rem;
 }
 
-.link-small:hover {
+.login-link-small:hover {
   text-decoration: underline;
 }
 
-.signup-row {
+.login-signup-row {
   text-align: center;
   font-size: 0.875rem;
   color: #6b7280;
@@ -156,17 +152,17 @@
   border-top: 1px solid #e5e7eb;
 }
 
-.signup-row span {
+.login-signup-row span {
   font-weight: 600;
   color: #1f1f1f; 
   margin-right: 0.25rem      
 }
 
-.signup-row .text-violet-600 { /* Usando a classe original que você enviou */
+.login-signup-row .text-violet-600 { /* Usando a classe original que você enviou */
     color: var(--cor-link);
     text-decoration: none;
     font-weight: 600;
 }
-.signup-row .text-violet-600:hover {
+.login-signup-row .text-violet-600:hover {
     text-decoration: underline;
 }

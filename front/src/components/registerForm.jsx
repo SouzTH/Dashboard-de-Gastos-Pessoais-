@@ -65,18 +65,18 @@ function RegisterForm() {
 
   return (
     <>
-    <div className="formulario-container">
-      <div className="imagem-perfil-bloco">
-        <button className="botao-upload-img">
+    <div className="rg-formulario-container">
+      <div className="rg-imagem-perfil-bloco">
+        <button className="rg-botao-upload-img">
           +
         </button>
       </div>
 
-      <div className="inputs-bloco">
-        <div className="grupo-input">
-          <p className="input-label">Nome</p>
+      <div className="rg-inputs-bloco">
+        <div className="rg-grupo-input">
+          <p className="rg-input-label">Nome</p>
           <input
-            className="campo-input"
+            className="rg-campo-input"
             type="text"
             value={nome}
             placeholder="Seu Nome"
@@ -84,10 +84,10 @@ function RegisterForm() {
           />
         </div>
 
-        <div className="grupo-input">
-          <p className="input-label">Email</p>
+        <div className="rg-grupo-input">
+          <p className="rg-input-label">Email</p>
           <input
-            className="campo-input"
+            className="rg-campo-input"
             type="email"
             value={email}
             placeholder="Seu@email.com"
@@ -95,10 +95,10 @@ function RegisterForm() {
           />
         </div>
 
-        <div className="grupo-input">
-          <p className="input-label">Senha</p>
+        <div className="rg-grupo-input">
+          <p className="rg-input-label">Senha</p>
           <input
-            className="campo-input"
+            className="rg-campo-input"
             type="password"
             value={password}
             placeholder="Sua senha"
@@ -106,10 +106,10 @@ function RegisterForm() {
           />
         </div>
 
-        <div className="grupo-input">
-          <p className="input-label">Confirme a senha</p>
+        <div className="rg-grupo-input">
+          <p className="rg-input-label">Confirme a senha</p>
           <input
-            className="campo-input"
+            className="rg-campo-input"
             type="password"
             value={password2}
             placeholder="Sua senha novamente"
@@ -120,15 +120,15 @@ function RegisterForm() {
       </div>
 
       <button
-        className="botao-cadastro"
+        className="rg-botao-cadastro"
         onClick={() => checkRegister()}
       >
         Cadastre-se
       </button>
 
-      <div className="grupo-link-login">
+      <div className="rg-grupo-link-login">
         <p>Já tem uma conta?</p>
-        <NavLink to="/login" className="link-login">
+        <NavLink to="/login" className="rg-link-login">
           Faça login!
         </NavLink>
       </div>

@@ -10,10 +10,10 @@ function Register() {
 
   return (
     <>
-    <div className="pagina-autenticacao">
+    <div className="rg-pagina-autenticacao">
       <HomeLinkLogo logoSrc={LogoImage} />
         <div className="card-registro">
-          <h1 className="titulo-autenticacao">Faça seu Cadastro!</h1>
+          <h1 className="rg-titulo-autenticacao">Faça seu Cadastro!</h1>
           <RegisterForm/>
       </div>
     </div>

@@ -80,16 +80,16 @@ export default function Login() {
               onChange={() => setLembrar(!lembrar)}
               label="Lembre-se de mim"
             />
-            <NavLink to="/forgot" className="link-small">
+            {/* <NavLink to="/forgot" className="login-link-small">
               Esqueceu sua senha?
-            </NavLink>
+            </NavLink> */}
           </div>
 
           <Button type="submit" className="login-button">
             Entrar
           </Button>
 
-          <div className="signup-row">
+          <div className="login-signup-row">
             <span>Não tem conta?</span>
             <NavLink to="/register" className="text-violet-600">
               Cadastre-se

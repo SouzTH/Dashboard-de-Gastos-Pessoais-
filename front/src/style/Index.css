@@ -1,27 +1,13 @@
 :root {
-    --text-dark: #333;
-    --bg-light: #f0f4f8;
     --nav-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-
-    --fundo-primario: #EDE9FE;
-    --borda-primaria: #856C97;
 
     --fundo-gradiente-inicio: #E1CCF7;
     --fundo-gradiente-meio: #d8ece6;
     --fundo-gradiente-fim: #F5E8FB;
-
-    --texto-titulo: #312E81;
-    --primary-color: var(--texto-titulo);
-    --card-bg: #ffffff;
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap');
 
-html, body, #root, .min-h-screen {
-    min-height: 100vh;
-    margin: 0;
-    padding: 0;
-}
 
 body {
     font-family: "Inter", sans-serif;
@@ -32,18 +18,14 @@ body {
         var(--fundo-gradiente-fim) 100%);
 }
 
-.min-h-screen {
-    background: none;
-}
-
-.header-fixa {
+.index-header-fixa {
     margin-top: 32px;
     display: flex;
     justify-content: center;
     width: 100%;
 }
 
-.navbar {
+.index-navbar {
     width: 90%;
     max-width: 1200px;
     padding: 10px 20px;
@@ -58,7 +40,7 @@ body {
     justify-content: space-between;
 }
 
-.logo-link {
+.index-logo-link {
     text-decoration: none;
     display: flex;
     align-items: center;
@@ -66,8 +48,7 @@ body {
     transition: color 0.2s ease;
 }
 
-.logo-icon {
-    
+.index-logo-icon {
     width: 45px;
     height: 45px;
     display: flex;
@@ -75,23 +56,23 @@ body {
     justify-content: center;
 }
 
-.logo-icon img {
+.index-logo-icon img {
     width: 100%;
     height: 100%;
 }
 
-.icone{
+.index-icone{
     color:#5dbd48; 
     flex-shrink: 0;
 }
 
-.navbar h1{
+.index-navbar h1{
     font-family: "Inter", sans-serif;
     font-size: 24px;
     font-weight: 800;
 }
 
-.button-cta {
+.index-button-cta {
     display: inline-block;
     text-decoration: none;
     padding: 10px 20px;
@@ -104,7 +85,7 @@ body {
     transition: background-color 0.2s ease, transform 0.1s ease;
 }
 
-.button-cta2 {
+.index-button-cta2 {
     display: inline-block;
     text-decoration: none;
     padding: 10px 20px;
@@ -117,25 +98,25 @@ body {
     transition: background-color 0.2s ease, transform 0.1s ease;
 }
 
-.button-cta2:hover {
+.index-button-cta2:hover {
     background-color: #360e61;
     opacity: 1;
     transform: scale(1.05);
 }
 
-.button-cta:hover {
+.index-button-cta:hover {
     background-color: rgb(63, 155, 42);
     opacity: 1;
     transform: scale(1.05);
 }
 
-.container {
+.index-container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 1.5rem;
 }
 
-.apresentacao{
+.index-apresentacao{
     width: 90%;
     max-width: 1200px;
     margin: 40px auto;
@@ -147,39 +128,39 @@ body {
     text-align: center;
 }
 
-.apresentacao .main-title{
+.index-apresentacao .index-main-title{
     font-size: 3rem;
     font-weight: 800;
     color: black;
     margin-bottom: 0.5rem;
 }
 
-.apresentacao .main-description{
+.index-apresentacao .index-main-description{
     color: #272727;
     margin-top: 0rem;
     margin-bottom: 2.5rem;
     font-size: 1.25rem;
 }
 
-.features {
+.index-features {
     padding: 4rem 0;
     text-align: center;
 }
 
-.features h2 {
+.index-features h2 {
     font-size: 2.25rem;
     color: black;
     margin-bottom: 3rem;
     font-weight: 800;
 }
 
-.features-grid {
+.index-features-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /*deixa os cards em colunas*/
     gap: 2rem;
 }
 
-.feature-item{
+.index-feature-item{
     padding: 20px;
     background-color: white;
     border: 1px solid black;
@@ -188,65 +169,65 @@ body {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.feature-item:hover {
+.index-feature-item:hover {
     transform: translateY(-1px); /*levanta um pouco*/
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
 }
 
-.feature-icon {
+.index-feature-icon {
     margin-bottom: 1rem;
     display: flex;
     justify-content: center;
 }
 
-.feature-item h3 {
+.index-feature-item h3 {
     margin-top: 1rem;
     font-size: 1.5rem;
     color: black;
     font-weight: 700;
 }
 
-.feature-item p {
+.index-feature-item p {
     color: #666;
     margin-top: 0.5rem;
 }
 
-.about-us {
+.index-about-us {
     background-color: transparent;
     padding: 4rem 0;
     text-align: center;
 }
 
-.about-us h2 {
+.index-about-us h2 {
     font-size: 2.25rem;
     color: black;
     margin-bottom: 0.5rem;
     font-weight: 800;
 }
 
-.about-us p {
+.index-about-us p {
 margin-bottom: 3rem;
 }
 
 
-.team-grid {
+.index-team-grid {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
     gap: 2rem;
 }
 
-.member-card {
+.index-member-card {
     width: 200px;
     padding: 1rem;
     text-align: center;
-    background-color: var(--card-bg);
+    background-color: white;
     border-radius: 12px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     border: 1px solid black;
 }
 
-.member-card .member-foto {
+.index-member-card .index-member-foto {
     width: 100px;
     height: 100px;
     border-radius: 50%;
@@ -255,12 +236,12 @@ margin-bottom: 3rem;
     border: 2px solid #7818DB;
 }
 
-.member-card h4 {
+.index-member-card h4 {
     font-size: 1.1rem;
     color: black;
 }
 
-.member-card p {
+.index-member-card p {
     font-size: 0.9rem;
     color: #999;
 }
