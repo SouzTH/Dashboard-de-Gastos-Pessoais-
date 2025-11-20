@@ -32,7 +32,7 @@ export const UserProvider = ({ children }) => {
     setToken(null);
     localStorage.removeItem("token");
     delete api.defaults.headers.common["Authorization"];
-    navigate("/login");
+    navigate("/");
     if(!token){
       toast.error("Você não está autenticado, por favor faça login.");
     }
