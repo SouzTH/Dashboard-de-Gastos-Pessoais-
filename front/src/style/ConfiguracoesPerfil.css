@@ -1,29 +1,26 @@
-.perfil-container {
-    height: 800px;
-    width: 500px;
+.cp-perfil-container {
+    height: fit-content;
+    width: 450px;
     margin: 60px;
-
     background-color: white;
     border: 2px solid black;
     border-radius: 1rem;
-
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     padding: 2rem;
-
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
 }
 
-.titulo-configuracoes {
+.cp-titulo-configuracoes {
     font-weight: 600;
     font-size: 1.75rem;
     margin-bottom: 2rem;
     color: #1f2937;
 }
 
-.divisor {
+.cp-divisor {
     width: 100%;
     max-width: 600px;
     margin-top: 1.5rem;
@@ -32,7 +29,7 @@
     border-top: 1px solid #d1d5db;
 }
 
-.perfil-info-container {
+.cp-perfil-info-container {
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
@@ -42,26 +39,26 @@
     margin-bottom: 2rem;
     gap: 1.5rem;
 }
-.perfil-detalhes {
+.cp-perfil-detalhes {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     text-align: left;
 }
 
-.info-nome {
+.cp-info-nome {
     font-size: 1.25rem;
     font-weight: 600;
     margin-bottom: 0.5rem;
     color: #1f2937;
 }
 
-.info-email {
+.cp-info-email {
     color: #6b7280;
     margin-bottom: 1rem;
 }
 
-.perfil-foto-container {
+.cp-perfil-foto-container {
     position: relative;
     width: 8rem;
     aspect-ratio: 1 / 1;
@@ -71,13 +68,13 @@
     margin-right: 10;
     border: 0.10px solid #7818DB;
 }
-.perfil-foto {
+.cp-perfil-foto {
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
 
-.perfil-foto-botao {
+.cp-perfil-foto-botao {
     position: absolute;
     top: 0;
     bottom: 0;
@@ -97,34 +94,34 @@
     border: none;
 }
 
-.perfil-foto-container:hover .perfil-foto-botao {
+.cp-perfil-foto-container:hover .cp-perfil-foto-botao {
     opacity: 1;
 }
 
-.input-escondido {
+.cp-input-escondido {
     display: none;
 }
 
-.form-container-geral {
+.cp-form-container-geral {
     width: 100%;
     max-width: 28rem;
     margin-left: auto;
     margin-right: auto;
 }
 
-.form-titulo {
+.cp-form-titulo {
     font-size: 20px;
     margin-bottom: 1.5rem;
     color: #000000;
 }
 
-.perfil-form {
+.cp-perfil-form {
     display: flex;
     flex-direction: column;
     gap: 1rem;
 }
 
-.rotulo{
+.cp-rotulo{
     display: block;
     font-size: 0.875rem;
     font-weight: 500;
@@ -132,7 +129,7 @@
     margin-bottom: 0.25rem;
 }
 
-.campo-input {
+.cp-campo-input {
     width: 100%;
     padding: 0.5rem 0.75rem;
     border: 1px solid #d1d5db;
@@ -140,13 +137,13 @@
     font-size: 1rem;
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
-.campo-input:focus {
+.cp-campo-input:focus {
     outline: none;
     border-color: #7b18db;
     box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.25);
 }
 
-.botao-salvar{
+.cp-botao-salvar{
     width: 100%;
     background-color: #7b18db;
     color: white;
@@ -158,11 +155,11 @@
     transition: background-color 0.2s ease-in-out;
     margin-top: 0.5rem;
 }
-.botao-salvar:hover {
+.cp-botao-salvar:hover {
     background-color: #360e61;
 }
 
-.delete-container {
+.cp-delete-container {
     margin-top: 1.5rem;
     width: 100%;
     max-width: 28rem;
@@ -176,7 +173,7 @@
     text-align: center;
 }
 
-.botao-delete-conta{
+.cp-botao-delete-conta{
     width: 100%;
     background-color: #9b0202;
     color: white;
@@ -189,19 +186,14 @@
     margin-bottom: 0.5rem; 
 }
 
-.botao-delete-conta:hover {
+.cp-botao-delete-conta:hover {
     background-color: #440f0f;
 }
 
-.aviso-delete-conta {
+.cp-aviso-delete-conta {
     font-size: 0.875rem;
     color: #9b0202;
     margin-top: 0.5rem;
     line-height: 1.4;
-}
-
-.carregando {
-    font-size: 1.25rem;
-    color: #1f2937;
 }
 

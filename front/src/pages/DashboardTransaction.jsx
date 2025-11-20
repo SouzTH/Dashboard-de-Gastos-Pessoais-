@@ -2,6 +2,8 @@ import { useContext, useState } from "react";
 import { TransactionContext } from "../context/TransactionContext";
 import { UserContext } from "../context/UserContext";
 import { ToastContainer, toast } from 'react-toastify';
+
+import '../style/Transacao.css';
   
 function DashboardTransaction() {
   
@@ -108,31 +110,33 @@ function DashboardTransaction() {
   return (
     <>
       <ToastContainer />
-      <div className="w-3/4 p-6 h-screen">
-        <div className="flex flex-row min-w-full h-full justify-between space-x-8">
+      <div className="transacao-container">
+        <div className="transacao-layout">
           {/* Metade Esquerda: Formulário */}
-            <div className="w-1/2 p-4 border border-gray-800 rounded-lg shadow-lg bg-gray-50 overflow-auto h-full">
-              <h2 className="text-xl font-semibold self-baseline-center">
+            <div className="transacao-form-card">
+              <h2 className="transacao-form-titulo">
                 {editId ? "Editar Transação" : "Adicionar Nova Transação"}
               </h2>
 
-              <form onSubmit={handleSubmit} className="space-y-2">
-                <div>
-                  <label className=" text-sm font-medium text-gray-700">
+              <form onSubmit={handleSubmit} className="transacao-form-content">
+                {/* Tipo de Transação */}
+                <div className="transacao-form-campo">
+                  <label className="transacao-form-label"> 
                     Tipo:
                   </label>
                   <select
                     name="tipo_de_transacao"
                     value={newTransaction.tipo_de_transacao}
                     onChange={handleChange}
-                    className="mt-1 w-full border border-gray-400 rounded-md p-2"
+                    className="transacao-form-select"
                   >
                     <option value="receita">Receita</option>
                     <option value="despesa">Despesa</option>
                   </select>
                 </div>
-                <div>
-                  <label className="text-sm font-medium text-gray-700">
+                {/* Valor */}
+                <div className="transacao-form-campo">
+                  <label className="transacao-form-label">
                     Valor:
                   </label>
                   <input
@@ -143,37 +147,43 @@ function DashboardTransaction() {
                     required
                     min="0.01"
                     step="0.01" 
-                    className="mt-1 w-full border border-gray-400 rounded-md p-2"
+                    className="transacao-form-input"
                   />
                 </div>
-                <div>
-                  <label className="text-sm font-medium text-gray-700">
-                    Data:
-                  </label>
-                  <input
-                    type="date"
-                    name="data_transacao"
-                    value={newTransaction.data_transacao}
-                    onChange={handleChange}
-                    required
-                    className="mt-1 w-full border border-gray-400 rounded-md p-2"
-                  />
+                {/* Data e descrição */}
+                <div className="transacao-form-grid">
+                  <div className="transacao-form-campo">
+                    <label className="transacao-form-label">
+                      Data:
+                    </label>
+                    <input
+                      type="date"
+                      name="data_transacao"
+                      value={newTransaction.data_transacao}
+                      onChange={handleChange}
+                      required
+                      className="transacao-form-input"
+                    />
+                  </div>
+
+                  <div className="transacao-form-campo">
+                    <label className="transacao-form-label">
+                      Descrição:
+                    </label>
+                    <input
+                      type="text"
+                      name="descricao"
+                      value={newTransaction.descricao}
+                      onChange={handleChange}
+                      placeholder="Ex: Salário, Aluguel"
+                      required
+                      className="transacao-form-input"
+                    />
+                  </div>
                 </div>
-                <div>
-                  <label className="text-sm font-medium text-gray-700">
-                    Descrição:
-                  </label>
-                  <input
-                    type="text"
-                    name="descricao"
-                    value={newTransaction.descricao}
-                    onChange={handleChange}
-                    required
-                    className="mt-1 w-full border border-gray-400 rounded-md p-2"
-                  />
-                </div>
-                <div>
-                  <label className="text-sm font-medium text-gray-700">
+                {/* Categoria */}
+                <div className="transacao-form-campo">
+                  <label className="transacao-form-label">
                     Categoria:
                   </label>
                   <input
@@ -181,12 +191,14 @@ function DashboardTransaction() {
                     name="categoria"
                     value={newTransaction.categoria}
                     onChange={handleChange}
+                    placeholder="Ex: Alimentação, Lazer"
                     required
-                    className="mt-1 w-full border border-gray-400 rounded-md p-2"
+                    className="transacao-form-input"
                   />
                 </div>
-                <div>
-                  <label className="text-sm font-medium text-gray-700">
+                {/* Conta */}
+                <div className="transacao-form-campo">
+                  <label className="transacao-form-label">
                     Conta:
                   </label>
                   <input
@@ -194,8 +206,9 @@ function DashboardTransaction() {
                     name="conta"
                     value={newTransaction.conta}
                     onChange={handleChange}
+                    placeholder="Ex: Santander, Nubank, VISA, PIX"
                     required
-                    className="mt-1 w-full border border-gray-400 rounded-md p-2"
+                    className="transacao-form-input"
                   />
                 </div>
 
@@ -223,31 +236,32 @@ function DashboardTransaction() {
               </form>
             </div>
             {/* Metade Direita: Lista de Transações */}
-            <div className="flex flex-col w-1/2 h-full space-y-4 p-4 border border-gray-800 rounded-lg shadow-lg bg-gray-50">
-              <div className="flex justify-between items-center">
-                <h2 className="text-xl font-semibold">Minhas Transações</h2>
+            <div className="transacao-lista-card">
+              <div className="transacao-lista-header">
+                <h2 className="transacao-lista-titulo">Minhas Transações</h2>
                 <button
                   onClick={loadTransactions}
-                  className="bg-emerald-500 text-white font-semibold cursor-pointer p-2 rounded text-sm hover:bg-emerald-600 transition duration-150"
+                  className="w-1/3 font-semibold cursor-pointer bg-emerald-500 text-white p-2 rounded-md hover:bg-emerald-600 transition duration-150 mt-2"
                 >
                   Recarregar Lista
                 </button>
               </div>
+              {/* Mensagens de Status */}
+              {isLoading && <p className="text-center text-violet-600 py-4" >Carregando transações...</p>}
+              {error && <p className="text-center text-red-500 py-4">Erro: {error}</p>}
 
-              {isLoading && <p>Carregando transações...</p>}
-              {error && <p className="text-red-500">Erro: {error}</p>}
-
+              {/* Lista de Transações (Scrollable) */}
               {transactions && transactions.length === 0 && !isLoading && !error ? (
-                <p>Nenhuma transação encontrada para este usuário.</p>
+                <p className="text-center text-gray-500 py-10">Nenhuma transação encontrada para este usuário.</p>
               ) : (
-                <ul className="space-y-3 flex flex-col overflow-auto h-full">
+                <ul className="transacao-lista-transacoes">
                   {transactions.map((t) => (
                       <li key={t.id}
-                        className="p-4 border border-gray-600 rounded shadow-md flex justify-between items-center"
+                        className="transacao-item-transacao"
                       >
-                        <div className="w-1/2">
+                        <div className="transacao-item-detalhes">
                           
-                            <span className="font-semibold">{t.descricao}</span>
+                            <span className="transacao-item-descricao">{t.descricao}</span>
                             <span className={`flex flex-row ${
                               t.tipo_de_transacao.toLowerCase() === "receita" ? 
                                 "text-emerald-600" :
@@ -265,7 +279,7 @@ function DashboardTransaction() {
                             {new Date(t.data_transacao).toLocaleDateString()}
                           </p>
                         </div>
-                        <div className="space-x-4 w-1/2 flex justify-end">
+                        <div className="space-x-2 flex justify-end">
                           <button onClick={() => (handleEdit(t.id, t))} className="text-emerald-600 hover:text-white font-semibold p-2 cursor-pointer bg-white border rounded border-emerald-600 hover:bg-emerald-600 transition duration-150">
                             Editar
                           </button>
