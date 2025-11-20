@@ -13,8 +13,6 @@ import "../style/login.css";
 
 import { toast } from "react-toastify";
 
-//import { AuthContext } from "../context/AuthContext";
-
 export default function Login() {
   const navigate = useNavigate();
 
@@ -38,17 +36,13 @@ export default function Login() {
     try {
       const resposta = await loginUser();
 
-      console.log("Usuário logado com sucesso!", resposta);
       toast.success("Login realizado com sucesso!");
 
       if (lembrar) localStorage.setItem("email", email);
       else localStorage.removeItem("email");
-      console.log("passou no login");
       navigate("/dashboard/settings");
     } catch (err) {
-      console.error("Erro ao logar:", err);
-      toast.error("Erro ao logar!");
-      //alert("Falha ao logar!");
+      toast.error(`Erro ao logar! ${err.message}`);
     }
   };
 

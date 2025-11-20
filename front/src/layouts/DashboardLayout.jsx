@@ -6,7 +6,7 @@ import { backendURL } from "../services/api";
 
 import '../style/SideBar.css';
 
-import { MdDashboard, MdPeople, MdCompareArrows, MdSettings } from 'react-icons/md';
+import { MdDashboard, MdPeople, MdCompareArrows, MdSettings, MdLogout } from 'react-icons/md';
 
 const ImagemPadrao = "https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y";
 
@@ -19,7 +19,7 @@ function DashboardLayout() {
     ? `${backendURL}${user.foto}` 
     : ImagemPadrao;
 
-  //OBS PARA OS BOTÕES: irão virar uma função map() com as rotas corretas pra cada site!
+  const { logout } = useContext(UserContext);
 
   return (
     <>
@@ -47,9 +47,6 @@ function DashboardLayout() {
               <span className="menu-link-texto">Minha Conta</span>
             </NavLink>
           </div>
-          <div className="space">
-            
-          </div>
           <div className="menu-navegacao">
 
             <NavLink to="/dashboard" className="botao">
@@ -66,8 +63,14 @@ function DashboardLayout() {
               <MdCompareArrows size={24} className="menu-icone" />
               <span className="menu-link-texto">Transações</span>
             </NavLink>
-            
+
+            <button onClick={() => logout()} className="botao cursor-pointer">
+              <MdLogout size={24} className="menu-icone" />
+              <span className="menu-link-texto">Sair</span>
+            </button>
           </div>
+          
+          
         </div>
         <Outlet />
       </div>

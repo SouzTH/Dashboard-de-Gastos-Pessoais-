@@ -51,12 +51,12 @@ function RegisterForm() {
       toast.warn("As senhas são diferentes!");
       return false;
     }
-    console.log("passou na validação da senha");
+
     try {
       await CriarUsuario();
-      console.log("passou na validação do CriarUsuario");
+
     } catch (err) {
-      console.log("Erro ao cadastrar", err);
+      toast.error(`Erro ao cadastrar: ${err.message}`);
     }
 
     //alert("Você foi cadastrado!");
