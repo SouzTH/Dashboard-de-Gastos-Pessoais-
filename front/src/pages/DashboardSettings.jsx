@@ -44,12 +44,9 @@ export default function DashboardSettings() {
     try {
       await handleUpdate(formData);
       toast.success("Imagem atualizada com sucesso!");
-      //alert("Imagem atualizada com sucesso!");
       e.target.value = null;
     } catch (err) {
-      console.error("Erro ao atualizar imagem:", err);
-      //alert("Erro ao atualizar imagem!");
-      toast.error("Erro ao atualizar imagem!");
+      toast.error(`Erro ao atualizar imagem! ${err.message}`);
     }
   };
 
@@ -64,12 +61,10 @@ export default function DashboardSettings() {
     if (confirma) {
       try {
         await handleDelete();
-        //alert("Conta excluída com sucesso!");
         navigate("/login");
-        toast.error("Conta excluída com sucesso!");
+        toast.success("Conta excluída com sucesso!");
       } catch (error) {
-        console.error("Erro ao tentar excluir a conta:", error);
-        toast.error("Erro ao excluir a conta. Tente novamente.");
+        toast.error(`Erro excluir a conta. Tente novamente: ${error.message}`);
       }
     }
   };

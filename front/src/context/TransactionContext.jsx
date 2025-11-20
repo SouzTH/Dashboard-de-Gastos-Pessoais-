@@ -9,7 +9,6 @@ import {
 import { UserContext } from "./UserContext";
 import api from "../services/api";
 
-// eslint-disable-next-line react-refresh/only-export-components
 export const TransactionContext = createContext();
 
 export const TransactionProvider = ({ children }) => {
@@ -29,7 +28,7 @@ export const TransactionProvider = ({ children }) => {
       const response = await api.get(`/read/all-transactions/${user.id}`);
       setTransactions(response.data.message); // message contém as transações, é um array de objetos
     } catch (err) {
-      console.error("Erro ao carregar transações:", err);
+      toast.error(`Erro ao carregar transações: ${err.message}`);
       setError("Falha ao carregar transações.");
       setTransactions([]);
     } finally { // independentemente de sucesso ou erro
@@ -48,6 +47,7 @@ export const TransactionProvider = ({ children }) => {
       await api.post(`/create/transaction/${user.id}`, data);
       await loadTransactions();
     } catch (err) {
+      toast.error(`Erro ao adicionar transação: ${err.message}`);
       setError("Erro ao adicionar transação.");
       throw new Error(err); 
     }
@@ -60,6 +60,7 @@ export const TransactionProvider = ({ children }) => {
       );
       await loadTransactions();
     } catch (err) {
+      toast.error(`Erro excluir a conta. Tente novamente: ${err.message}`);
       setError("Erro ao deletar transação.");
       throw new Error(err); 
     }

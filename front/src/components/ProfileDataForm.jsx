@@ -72,8 +72,8 @@ export default function ProfileDataForm({ user, handleUpdate }) {
 
       toast.success("Perfil atualizado com sucesso!");
     } catch (error) {
-      console.error("Erro ao atualizar perfil:", error);
-      toast.error("Falha ao atualizar perfil!");
+      
+      toast.error(`Falha ao atualizar perfil! ${error.message}`);
     }
   };
 

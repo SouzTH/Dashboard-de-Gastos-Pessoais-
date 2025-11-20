@@ -100,7 +100,7 @@ function DashboardTransaction() {
           setNewTransaction(editTransaction);
         }
       } catch (err) {
-        console.error("Falha ao editar:", err.message);
+        console.error(`Falha ao editar: ${err.message}`);
       }
   };
   if (!user) {

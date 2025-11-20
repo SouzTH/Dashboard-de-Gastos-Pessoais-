@@ -2,6 +2,7 @@ import { useState, useEffect, useContext } from "react";
 import { getTodasTransacoes } from "../services/api";
 import { UserContext } from "../context/UserContext";
 import ChartCard from "../components/ChartCard";
+import { toast } from "react-toastify";
 
 import "../style/Dashboard.css";
 
@@ -160,7 +161,7 @@ function DashboardHome() {
         });
 
       } catch (error) {
-        console.error("ERRO no Dashboard:", error);
+        toast.error(`Erro ao carregar dados do dashboard: ${error.message}`);
       } finally {
         setLoading(false);
       }
