@@ -47,10 +47,10 @@ function DashboardLayout() {
               <span className="sb-menu-link-texto">Minha Conta</span>
             </NavLink>
           </div>
-          <div className="menu-navegacao">
-            <NavLink to="/dashboard" className="botao">
-              <MdDashboard size={24} className="menu-icone" />
-              <span className="menu-link-texto">Dashboard</span>
+          <div className="sb-menu-navegacao">
+            <NavLink to="/dashboard" className="sb-botao">
+              <MdDashboard size={24} className="sb-menu-icone" />
+              <span className="sb-menu-link-texto">Dashboard</span>
             </NavLink>
             
             {/*desabilitado temporariamente
@@ -63,9 +63,9 @@ function DashboardLayout() {
               <MdCompareArrows size={24} className="sb-menu-icone" />
               <span className="sb-menu-link-texto">Transações</span>
             </NavLink>
-            <button onClick={() => logout()} className="botao cursor-pointer">
-              <MdLogout size={24} className="menu-icone" />
-              <span className="menu-link-texto">Sair</span>
+            <button onClick={() => logout()} className="sb-botao cursor-pointer">
+              <MdLogout size={24} className="sb-menu-icone" />
+              <span className="sb-menu-link-texto">Sair</span>
             </button>
           </div>
         </div>
